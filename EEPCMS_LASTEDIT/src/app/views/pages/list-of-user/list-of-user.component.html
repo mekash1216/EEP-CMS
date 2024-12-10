@@ -1,0 +1,94 @@
+<div *ngIf="loading" class="text-center">Loading users...</div>
+
+<div *ngIf="!loading" class="container mt-3">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">User List</h5>
+      <div class="d-flex align-items-center">
+        <input type="text" [(ngModel)]="searchTerm" (input)="filterUsers()" placeholder="Search..." class="form-control me-2" />
+        <button class="btn btn-primary" (click)="openModal()">Register</button>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div *ngIf="filteredUsers.length === 0" class="text-center">No users found.</div>
+
+      <div *ngIf="filteredUsers.length > 0" class="row">
+        <div class="col-md-6 mb-3" *ngFor="let user of paginatedUsers">
+          <div class="card border">
+            <div class="card-body">
+              <h5 class="card-title">{{ user.firstName || "N/A" }} {{ user.lastName || "N/A" }}</h5>
+              <p class="card-text">Email: {{ user.email }}</p>
+              <p class="card-text">Phone: {{ user.phoneNumber || "N/A" }}</p>
+              <p class="card-text">Roles: {{ user.roles && user.roles.length > 0 ? user.roles.join(", ") : "No roles assigned" }}</p>
+              <a (click)="toggleActivation(user)" role="button" tabindex="0" class="text-success me-2">
+                <i class="fas" [ngClass]="user.isActive ? 'fa-user-check' : 'fa-user-times'"></i>
+              </a>
+              <a (click)="editUser(user)" role="button" tabindex="0" class="text-warning me-2">
+                <i class="fas fa-edit"></i>
+              </a>
+              <a (click)="confirmDelete(user.email)" role="button" tabindex="0" class="text-danger">
+                <i class="fas fa-trash-alt"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between align-items-center">
+      <button (click)="prevPage()" [disabled]="currentPage === 1" class="btn btn-secondary">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="btn btn-secondary">Next</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{ show: showModal }" [style.display]="showModal ? 'block' : 'none'">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width: 500px; height: auto">
+      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <h5 class="modal-title">{{ selectedUserId ? 'Edit User' : 'Register User' }}</h5>
+        <button type="button" class="close" (click)="closeModal()" style="border: none; background: transparent; cursor: pointer;">
+          <span style="font-size: 24px">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 20px">
+        <form (ngSubmit)="registerUser()">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="newUser.email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" [(ngModel)]="newUser.firstName" name="firstName" required />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" [(ngModel)]="newUser.lastName" name="lastName" required />
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="newUser.phoneNumber" name="phoneNumber" required />
+          </div>
+
+
+          <div class="form-group">
+            <label for="role">Role</label>
+            <select class="form-control" id="role" [(ngModel)]="newUser.role" name="role" required>
+              <option value="" disabled selected>Select role</option>
+              <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" style="justify-content: center; padding: 20px">
+        <button class="btn" (click)="registerUser()" style="font-size: 24px; color: #007bff">
+          <i class="fas fa-check-circle"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

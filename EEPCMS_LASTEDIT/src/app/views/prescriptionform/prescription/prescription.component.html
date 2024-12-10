@@ -1,0 +1,153 @@
+
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<form [formGroup]="prescriptionForm" class="container ">
+  <div class="form-group">
+    <!-- Read-only field to display the patient's name -->
+    <label for="patientName">Patient Name:</label>
+    <input id="patientName" type="text" [value]="selectedPatient?.patientFirstName" class="form-control" readonly>
+    
+    <!-- Hidden field to store the patient ID -->
+    <input id="patientId" formControlName="patientId" [value]="selectedPatient?.patientId" type="hidden">
+  </div>
+
+
+  <div class="form-group">
+    <label for="weight">Weight:</label>
+    <input id="weight" formControlName="weight" type="number" [value]="selectedPatient?.weight" class="form-control">
+  </div> 
+  <div class="form-group">
+    <label for="diagnosis">Diagnosis:</label>
+    <input id="diagnosis" formControlName="diagnosis" type="text" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="date">Date:</label>
+    <input id="date" formControlName="date" type="date" class="form-control">
+  </div>
+
+  <div class="checkbox-container mt-3 mb-3">
+    <div class="form-check">
+      <input id="isInpatient" formControlName="isInpatient" type="checkbox" class="form-check-input">
+      <label for="isInpatient" class="form-check-label">Inpatient</label>
+    </div>
+  
+    <div class="form-check">
+      <input id="isOutpatient" formControlName="isOutpatient" type="checkbox" class="form-check-input">
+      <label for="isOutpatient" class="form-check-label">Outpatient</label>
+    </div>
+  
+    <div class="form-check">
+      <input id="isEmergency" formControlName="isEmergency" type="checkbox" class="form-check-input">
+      <label for="isEmergency" class="form-check-label">Emergency</label>
+    </div>
+  </div>
+
+
+<div class="input-group">
+  <div class="form-outline" data-mdb-input-init>
+    <input type="button" value="Add Item" id="form1" class="form-control" />
+  </div>
+  <button type="button" class="btn btn-info" data-mdb-ripple-init  (click)="addPrescriptionItem()" >
+    <i class="fas fa-plus"></i>
+  </button>
+</div>
+
+
+
+<!-- 
+<div>
+  <ol>
+  @for (item of prescriptionItems; track item ) {
+    
+<div class="saved-items-container">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Stock Name</th>
+      <th>Quantity</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ getStockName(item.stockId) }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-secondary" (click)="editSavedItem(item)">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button type="button" class="btn btn-outline-danger" (click)="removeSavedItem(item)">
+            <i class="fas fa-trash"></i>
+          </button>
+          <button type="button" class="btn btn-outline-danger" (click)="removePrescriptionItem(i)">
+            <i class="fas fa-trash"></i> Remove
+          </button>
+          
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+  }
+  </ol>
+</div> -->
+
+<!-- Display saved items in a table -->
+<div class="saved-items-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Stock Name</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of prescriptionItems; let i = index">
+        <td>{{ getStockName(item.stockId) }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>
+          <div class="btn-group">
+            <!-- <button type="button" class="btn btn-outline-secondary" (click)="editSavedItem(item)">
+              <i class="fas fa-edit"></i> 
+            </button> -->
+            <button type="button" class="btn btn-outline-danger" (click)="removePrescriptionItem(i)">
+              <i class="fas fa-trash"></i> 
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <button type="submit" class="btn btn-primary mt-3" (click)="onSubmit()" >Create Prescription</button>
+
+
+</div>
+ 
+</form>
+
+
+<!-- Modal -->
+<div class="modal" [class.modal-open]="modalOpen">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Prescription Item</h5>
+        <button type="button" class="close" (click)="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <app-prescription-item [prescriptionId]="createdPrescriptionId" [selectedAssignment]="selectedAssignment" [stock]="stocks" #addItemDialog></app-prescription-item>
+      </div>
+    </div>
+  </div>
+</div>

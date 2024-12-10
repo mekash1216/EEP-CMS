@@ -1,0 +1,181 @@
+<div *ngIf="request" class="request-details">
+  <!-- Header Card -->
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <img src="assets/favicon.ico" alt="Logo" class="logo me-2">
+        <div>
+          <h5 class="mb-0">Ethiopian Electric Power</h5>
+          <h5 class="mb-0">Medium Clinic Referral Slip</h5>
+        </div>
+      </div>
+      <button class="btn btn-primary" (click)="navigateToEdit(request.id)">
+        Edit
+      </button>
+    </div>
+  </div>
+
+  <!-- Single Card with All Categories -->
+  <div class="card">
+    <div class="card-header d-flex justify-content-between">
+      <span>Laboratory Tests</span>
+      <small class="text-muted ms-auto">Date: {{ request.dateOfRequest | date:'longDate' }}</small>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <strong>From:</strong> EEP
+        </div>
+        <div class="col-md-6">
+          <strong>To:</strong> {{ request.hospitalName }}
+        </div>
+      </div>
+      <div class="row">
+        <!-- Biochemistry Section -->
+        <div *ngIf="request.isBiochemistryChecked" class="col-md-4 mb-3">
+          <h6>Biochemistry</h6>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let item of getCheckedItems(request.biochemistry)" >
+              <label>
+                <!-- <input type="checkbox" [checked]="item.value" [disabled]="!editMode" (change)="item.value = !item.value" /> -->
+                {{ item.key }}
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Bacteriology Section -->
+        <div *ngIf="request.isBacteriologyChecked" class="col-md-4 mb-3">
+          <h6>Bacteriology</h6>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let item of getCheckedItems(request.bacteriology)" >
+              <label>
+                {{ item.key }}
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Serology Section -->
+        <div *ngIf="request.isSerologyChecked" class="col-md-4 mb-3">
+          <h6>Serology</h6>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let item of getCheckedItems(request.serology)" >
+              <label>
+                {{ item.key }}
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Electrolyte Section -->
+        <div *ngIf="request.isElectrolyteChecked" class="col-md-4 mb-3">
+          <h6>Electrolyte</h6>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let item of getCheckedItems(request.electrolyte)" >
+              <label>
+                {{ item.key }}
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cancer Marker Section -->
+        <div *ngIf="request.isCancerMarkerChecked" class="col-md-4 mb-3">
+          <h6>Cancer Marker</h6>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let item of getCheckedItems(request.cancerMarker)" >
+              <label>
+                {{ item.key }}
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cardiac Marker Section -->
+        <div *ngIf="request.isCardiacMarkerChecked" class="col-md-4 mb-3">
+          <h6>Cardiac Marker</h6>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let item of getCheckedItems(request.cardiacMarker)" >
+              <label>
+                {{ item.key }}
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Coagulation Section -->
+        <div *ngIf="request.isCoagulationChecked" class="col-md-4 mb-3">
+          <h6>Coagulation</h6>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let item of getCheckedItems(request.coagulation)">
+              <label>
+                {{ item.key }}
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Hormone Section -->
+        <div *ngIf="request.isHormoneChecked" class="col-md-4 mb-3">
+          <h6>Hormone</h6>
+          <ul class="list-group list-group-flush ml-3">
+            <li *ngFor="let item of getCheckedItems(request.hormone)" >
+              <label>
+                {{ item.key }}
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Other Lab Section -->
+        <div *ngIf="request.isOtherLabChecked" class="col-md-4 mb-3">
+          <h6>Other Lab</h6>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let item of getCheckedItems(request.otherLab)" >
+              <label>
+                {{ item.key }}
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Hematology Section -->
+        <div *ngIf="request.isHematologyChecked" class="col-md-4 mb-3">
+          <h6>Hematology</h6>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let item of getCheckedItems(request.hematology)" >
+              <label>
+                {{ item.key }}
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Parasitology Section -->
+        <div *ngIf="request.isParasitologyChecked" class="col-md-4 mb-3">
+          <h6>Parasitology</h6>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let item of getCheckedItems(request.parasitology)" >
+              <label>
+                {{ item.key }}
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <footer class="mt-4">
+        <div class="text-center">
+          <p>Doctor: {{ currentUser?.email }}</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Print Button -->
+  <div class="d-flex justify-content-end mt-3">
+    <button class="btn btn-success" (click)="printPage()">
+      Print
+    </button>
+  </div>
+</div>

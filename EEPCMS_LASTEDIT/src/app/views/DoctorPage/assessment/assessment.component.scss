@@ -1,0 +1,43 @@
+/* Ensure your card and table are styled properly */
+.card {
+    margin: 20px;
+  }
+  
+  .table {
+    margin-bottom: 0;
+  }
+  
+  /* Center the pagination controls */
+  .pagination {
+    margin-top: 20px;
+  }
+  
+  /* Optional: Add some spacing around icons */
+  .btn i {
+    margin-right: 5px;
+  }
+
+
+ /* Add to your component's CSS file or global styles */
+.container {
+  position: relative; /* Allows for absolute positioning of child elements */
+}
+
+.user-info-container {
+  position: absolute; /* Position the user info container absolutely */
+  bottom: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  display: flex;
+  justify-content: flex-end; /* Align items to the end of the container */
+  align-items: center;
+}
+
+.user-info {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #212529;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,482 @@
+<div class="container mt-4">
+  <!-- Navigation Tabs -->
+  <ul class="nav nav-tabs" id="dataTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" [class.active]="filterOption === 'referrals'" (click)="filterOption = 'referrals'; filterData()" id="referrals-tab" data-bs-toggle="tab" href="#referrals" role="tab">Referrals</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" [class.active]="filterOption === 'examination'" (click)="filterOption = 'examination'; filterData()" id="examination-tab" data-bs-toggle="tab" href="#examination" role="tab">Examination</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" [class.active]="filterOption === 'appointments'" (click)="filterOption = 'appointments'; filterData()" id="appointments-tab" data-bs-toggle="tab" href="#appointments" role="tab">Appointments</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" [class.active]="filterOption === 'prescriptions'" (click)="filterOption = 'prescriptions'; filterData()" id="prescriptions-tab" data-bs-toggle="tab" href="#prescriptions" role="tab">Prescriptions</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" [class.active]="filterOption === 'labresults'" (click)="filterOption = 'labresults'; filterData()" id="labresults-tab" data-bs-toggle="tab" href="#labresults" role="tab">labresults</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" [class.active]="filterOption === 'recent'" (click)="filterOption = 'recent'; filterData()" id="recent-tab" data-bs-toggle="tab" href="#recent" role="tab">Recent</a>
+    </li>
+    
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="tab-content mt-3">
+    <!-- Referrals Tab -->
+    <div class="tab-pane fade" [ngClass]="{'show active': filterOption === 'referrals'}" id="referrals" role="tabpanel">
+      <!-- Filter Card -->
+      <div class="card mb-3">
+        <div class="card-header">
+          Filter Referrals
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterData()" placeholder="Search..." class="form-control" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" [(ngModel)]="startDate" (ngModelChange)="filterData()" class="form-control" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" [(ngModel)]="endDate" (ngModelChange)="filterData()" class="form-control" />
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <!-- Referrals Table -->
+      <table class="table table-striped" *ngIf="filteredData.length > 0 && filterOption === 'referrals'">
+        <thead>
+          <tr>
+            <th>Patient Name: {{ filteredData[0]?.examiner?.patientName || 'No patient name available' }}</th>
+          </tr>
+          <tr>
+            <th>Investigation Result</th>
+            <th>Referral Details</th>
+            <th>Examiner</th>
+            <th>Referral Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let referral of filteredData">
+            <td>{{ referral.investigationResult }}</td>
+            <td>{{ referral.referralDetails }}</td>
+            <td>{{ referral.examiner?.regExaminerName }}</td>
+            <td>{{ referral.referralDate | date:'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Examination Tab -->
+    <div class="tab-pane fade" [ngClass]="{'show active': filterOption === 'examination'}" id="examination" role="tabpanel">
+      <!-- Filter Card -->
+      <div class="card mb-3">
+        <div class="card-header">
+          Filter Examinations
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterData()" placeholder="Search..." class="form-control" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" [(ngModel)]="startDate" (ngModelChange)="filterData()" class="form-control" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" [(ngModel)]="endDate" (ngModelChange)="filterData()" class="form-control" />
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <!-- Examination Table -->
+      <table class="table table-striped" *ngIf="filteredData.length > 0 && filterOption === 'examination'">
+        <thead>
+          <tr>
+            Name of Patient: {{ getPatientName(filteredData[0]?.patientId) }}
+          </tr>
+          <tr>
+            <th>General Appearance</th>
+            <th>Vital Signs</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of filteredData">
+            <td>{{ exam.generalAppearance }}</td>
+            <td>{{ exam.vitalSigns }}</td>
+            <td>{{ exam.examinationDate | date:'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Appointments Tab -->
+    <div class="tab-pane fade" [ngClass]="{'show active': filterOption === 'appointments'}" id="appointments" role="tabpanel">
+      <!-- Filter Card -->
+      <div class="card mb-3">
+        <div class="card-header">
+          Filter Appointments
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterData()" placeholder="Search..." class="form-control" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" [(ngModel)]="startDate" (ngModelChange)="filterData()" class="form-control" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" [(ngModel)]="endDate" (ngModelChange)="filterData()" class="form-control" />
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <!-- Appointments Table -->
+      <table class="table table-striped" *ngIf="filteredData.length > 0 && filterOption === 'appointments'">
+        <thead>
+          <tr>
+            Name of Patient: {{ filteredData.length > 0 ? filteredData[0].patientFirstName : 'N/A' }}
+          </tr>
+          <tr>
+            <th>Appointment Date</th>
+            <th>Reason</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let appointment of filteredData">
+            <td>{{ appointment.appointmentDateTime | date:'short' }}</td>
+            <td>{{ appointment.reason }}</td>
+            <td>{{ appointment.details }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+<!-- Lab Results Tab -->
+<div class="tab-pane fade" [ngClass]="{'show active': filterOption === 'labresults'}" id="labresults" role="tabpanel">
+  <!-- Filter Card -->
+  <div class="card mb-3">
+    <div class="card-header">
+      Filter Lab Results
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+            <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterData()" placeholder="Search..." class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+            </div>
+            <input type="date" [(ngModel)]="startDate" (ngModelChange)="filterData()" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+            </div>
+            <input type="date" [(ngModel)]="endDate" (ngModelChange)="filterData()" class="form-control" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lab Results Table -->
+  <div class="card mb-3">
+    <div class="card-header">Lab Results</div>
+    <div class="card-body">
+      <table class="table table-striped" *ngIf="filteredData.length > 0 && filterOption === 'labresults'">
+        <thead>
+          <tr>
+            <th>Categories</th>
+            <th>Test Name</th>
+            <th>Result</th>
+            <th>Reference Range</th>
+            <th>Units</th>
+            <th>Test Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let result of filteredData">
+            <td>{{ result.category }}</td>
+            <td>{{ result.test }}</td>
+            <td>{{ result.result }}</td>
+            <td>{{ result.referenceRange }}</td>
+            <td>{{ result.units }}</td>
+            <td>{{ result.testDate | date: 'shortDate' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="filteredData.length === 0 && filterOption === 'labresults'">No lab results found.</p>
+    </div>
+  </div>
+  
+  <div class="card">
+    <div class="card-header">Special Lab Results</div>
+    <div class="card-body">
+      <table *ngIf="specialLabResults.length > 0" class="table">
+        <thead>
+          <tr>
+            <th>Test</th>
+            <th>Category</th>
+            <th>Color</th>
+            <th>Consistency</th>
+            <th>Selection One</th>
+            <th>Cell Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let result of specialLabResults">
+            <td><strong>{{ result.test }}</strong></td>
+            <td>{{ result.category }}</td>
+            <td>{{ result.color }}</td>
+            <td>{{ result.consistency }}</td>
+            <td>{{ result.selectionone }}</td>
+            <td>{{ result.cellCount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
+</div>
+
+
+
+    <!-- Prescriptions Tab -->
+    <div class="tab-pane fade" [ngClass]="{'show active': filterOption === 'prescriptions'}" id="prescriptions" role="tabpanel">
+      <!-- Filter Card -->
+      <div class="card mb-3">
+        <div class="card-header">
+          Filter Prescriptions
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterData()" placeholder="Search..." class="form-control" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" [(ngModel)]="startDate" (ngModelChange)="filterData()" class="form-control" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" [(ngModel)]="endDate" (ngModelChange)="filterData()" class="form-control" />
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <!-- Prescriptions Table -->
+      <table class="table table-striped" *ngIf="filteredData.length > 0 && filterOption === 'prescriptions'">
+        <thead>
+          <tr>
+            Name of Patient: {{ filteredData.length > 0 ?filteredData[0].nameOfPatient : 'N/A' }}
+          </tr>
+          <tr>
+            <th>Date</th>
+            <th>Diagnosis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prescription of filteredData">
+            <td>{{ prescription.date | date:'short' }}</td>
+            <td>{{ prescription.diagnosis }}</td>
+            <td>
+              <button (click)="openPrescriptionItemsModal(prescription)" class="btn btn-info btn-sm">View</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Recent Tab -->
+    <div class="tab-pane fade" [ngClass]="{'show active': filterOption === 'recent'}" id="recent" role="tabpanel">
+      <!-- Filter Card -->
+      <div class="card mb-3">
+        <div class="card-header">
+          Filter Recent Data
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterData()" placeholder="Search..." class="form-control" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" [(ngModel)]="startDate" (ngModelChange)="filterData()" class="form-control" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" [(ngModel)]="endDate" (ngModelChange)="filterData()" class="form-control" />
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <!-- Recent Table -->
+      <table class="table table-striped" *ngIf="filteredData.length > 0 && filterOption === 'recent'">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of filteredData">
+            <td>{{ item.type || 'NO History' }}</td>
+            <td>{{item.testDate || item.date ||item.examinationDate|| item.appointmentDateTime || item.referralDate | date:'short' }}</td>
+            <td>
+              <div *ngIf="item.category">
+                <p>{{ item.test }} => {{ item.category }}</p>
+                <p>Result: {{ item.result }}</p>
+                <p>Reference Range: {{ item.referenceRange }}</p>
+                <p>Units: {{ item.units }}</p>
+                <p>Severity: {{ item.severity }}</p>
+              </div>
+              
+              <div *ngIf="item.investigationResult">
+                <p>Investigation Result: {{ item.investigationResult }}</p>
+                <p>Referral Details: {{ item.referralDetails }}</p>
+                <p>Examiner: {{ item.examiner?.regExaminerName }}</p>
+              </div>
+              <div *ngIf="item.generalAppearance">
+                <p>General Appearance: {{ item.generalAppearance }}</p>
+                <p>Vital Signs: {{ item.vitalSigns }}</p>
+              </div>
+              <div *ngIf="item.appointmentDateTime">
+                <p>Appointment Date: {{ item.appointmentDateTime | date:'short' }}</p>
+                <p>Reason: {{ item.reason }}</p>
+              </div>
+              <div *ngIf="item.date && !item.appointmentDateTime && !item.referralDate">
+                <p>Diagnosis: {{ item.diagnosis }}</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+  </div>
+
+  <!-- Modal for Prescription Items -->
+  <div *ngIf="isModalOpen" class="modal fade show d-block" tabindex="-1" role="dialog" aria-labelledby="prescriptionItemsModalLabel" aria-hidden="true" style="background-color: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="prescriptionItemsModalLabel">Prescription Items for {{ selectedPrescription?.diagnosis }}</h5>
+          <button type="button" class="btn-close" (click)="closePrescriptionItemsModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Medical Name</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of selectedPrescription?.prescriptionItems">
+                <td>{{ getStockName(item.stockId) }}</td>
+                <td>{{ item.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closePrescriptionItemsModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

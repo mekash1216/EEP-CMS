@@ -1,0 +1,26 @@
+<div class="modal-body">
+  <!-- <h5 class="modal-title">Assign Patient</h5> -->
+  <!-- <button type="button" class="close" >
+    <span>&times;</span>
+  </button> -->
+  <form (ngSubmit)="assign()">
+  <!-- <div class="form-group"      >
+      <label for="id">ID Number:</label>
+      <input type="text" id="id" class="form-control" [value]="selectedPatient?.id" disabled>
+    </div>  -->
+     
+    <div class="form-group">
+      <label for="doctorSelect">Select Preminary Tester:</label>
+      <select id="doctorSelect" class="form-control" [(ngModel)]="selectedDoctorId" name="doctorSelect">
+        <option *ngFor="let doctor of doctors" [ngValue]="doctor.id">
+          {{ doctor.firstName }} 
+        </option>
+      </select>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary"  (click)="onCloseModal()">Close</button>
+      <button type="submit" class="btn btn-primary">Assign</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+
+// If you want to override variables do it here
+@import "variables";
+@import "@coreui/coreui/scss/coreui";
+@import "@coreui/chartjs/scss/coreui-chartjs";
+@import "theme";
+@import "custom";
+@import "examples";
+body, button, input, select, textarea {
+  font-family: 'Times New Roman', Times, serif !important;
+}
+a {
+  font-family: 'Times New Roman', Times, serif !important;
+}
+.mat-button {
+  font-family: 'Times New Roman', Times, serif !important;
+}
+
+.btn {
+  font-family: 'Times New Roman', Times, serif !important;
+}
+
+

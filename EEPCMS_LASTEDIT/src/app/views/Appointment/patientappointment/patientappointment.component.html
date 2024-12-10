@@ -1,0 +1,23 @@
+<!-- appointment-form.component.html -->
+<form [formGroup]="appointmentForm" (ngSubmit)="save()">
+  <div class="form-group">
+    <label for="appointmentDateTime">Appointment Date & Time:</label>
+    <input id="appointmentDateTime" formControlName="appointmentDateTime" type="datetime-local" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <!-- <label for="examinerId">Patient ID:</label> -->
+    <input id="examinerId" formControlName="examinerId" type="number" class="form-control" >
+  </div>
+  <div data-mdb-input-init class="form-outline">
+    <label class="form-label" for="reason">Reason</label>
+    <textarea id="reason" formControlName="reason" class="form-control"  rows="4"></textarea>
+  
+  </div>
+  <!-- <div class="form-group">
+    <label for="regExaminerId">Examiner ID:</label>
+    <input id="regExaminerId" formControlName="regExaminerId" type="number" class="form-control">
+  </div> -->
+
+  <button type="submit" class="btn btn-primary mt-3">Save Appointment</button>
+</form>

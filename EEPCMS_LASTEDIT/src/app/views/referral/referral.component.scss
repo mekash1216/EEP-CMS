@@ -1,0 +1,88 @@
+/* app.component.css */
+.modal {
+  display: block; /* Show the modal */
+}
+
+.modal-dialog {
+  max-width: 500px;
+  margin: 1.75rem auto;
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+}
+
+
+
+.action-buttons {
+  display: flex; 
+  gap: 8px; 
+}
+
+
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+
+
+.modal-content {
+  background-color: #fff; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+
+
+.modal-header {
+  background-color: #007bff; 
+  color: #fff; 
+  border-bottom: 1px solid #0069d9; 
+}
+
+
+.modal-title {
+  font-size: 1.25rem; 
+}
+
+
+.modal-body {
+  padding: 1rem; 
+}
+
+
+.close {
+  color: #fff; 
+}
+
+
+.close:hover {
+  color: #ccc;
+  text-decoration: none; 
+}
+
+
+.btn-save {
+  background-color: #28a745; 
+  color: #fff; 
+  border-color: #28a745; 
+}
+
+
+.btn-save:hover {
+  background-color: #218838; 
+  border-color: #1e7e34; 
+}
+
+
+.modal-dialog {
+  max-width: 800px;
+}
+

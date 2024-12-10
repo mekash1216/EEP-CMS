@@ -1,0 +1,167 @@
+<div class="container mt-4">
+  <!-- Header with Search and Toggle Button -->
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <!-- Search Input -->
+          <div class="d-flex align-items-center">
+            <i class="fas fa-search me-2"></i>
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Search..." 
+              [(ngModel)]="searchTerm" 
+              (ngModelChange)="filterReports()"
+            />
+          </div>
+  
+          <!-- Toggle Button -->
+          <button class="btn btn-primary" (click)="toggleForm()">
+            <i class="fas" [ngClass]="showForm ? 'fa-list' : 'fa-plus'"></i>
+            {{ showForm ? 'Show Report List' : 'Add Accident Report' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!-- Add Report Form -->
+<div class="row mb-3" *ngIf="showForm">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Add Accident Report</h5>
+        <form [formGroup]="newReportForm" (ngSubmit)="addAccidentReport()">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="patientName" class="form-label">Patient Name</label>
+              <input 
+                type="text" 
+                id="patientName" 
+                class="form-control" 
+                [(ngModel)]="patientName" 
+                (input)="onPatientNameChange($event)" 
+                [ngModelOptions]="{standalone: true}" 
+              />
+              <ul *ngIf="filteredPatients.length > 0" class="list-group mt-2">
+                <li 
+                  class="list-group-item list-group-item-action" 
+                  *ngFor="let patient of filteredPatients" 
+                  (click)="selectPatient(patient)"
+                >
+                  {{ patient.firstName }} {{ patient.lastName }}
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="department" class="form-label">Department</label>
+              <input type="text" id="department" class="form-control" formControlName="department">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="injuryDate" class="form-label">Injury Date</label>
+              <input type="datetime-local" id="injuryDate" class="form-control" formControlName="injuryDate">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="injuryTime" class="form-label">Injury Time</label>
+              <input type="text" id="injuryTime" class="form-control" formControlName="injuryTime">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="causeOfInjury" class="form-label">Cause of Injury</label>
+              <input type="text" id="causeOfInjury" class="form-control" formControlName="causeOfInjury">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="incidentDetails" class="form-label">Incident Details</label>
+              <textarea id="incidentDetails" class="form-control" formControlName="incidentDetails"></textarea>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="preventiveAction" class="form-label">Preventive Action</label>
+              <textarea id="preventiveAction" class="form-control" formControlName="preventiveAction"></textarea>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="reporterName" class="form-label">Reporter Name</label>
+              <input type="text" id="reporterName" class="form-control" formControlName="reporterName">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="departmentHeadName" class="form-label">Department Head Name</label>
+              <input type="text" id="departmentHeadName" class="form-control" formControlName="departmentHeadName">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="witnesses" class="form-label">Witnesses</label>
+              <div formArrayName="witnesses">
+                <div *ngFor="let witness of witnesses.controls; let i = index" [formGroupName]="i">
+                  <div class="row mb-2">
+                    <div class="col-md-5">
+                      <input formControlName="firstName" type="text" class="form-control" placeholder="First Name">
+                    </div>
+                    <div class="col-md-5">
+                      <input formControlName="lastName" type="text" class="form-control" placeholder="Last Name">
+                    </div>
+                    <div class="col-md-2 d-flex align-items-center">
+                      <button type="button" class="btn btn-danger" (click)="removeWitness(i)">Remove</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-secondary" (click)="addWitness()">Add Witness</button>
+            </div>
+            <div class="col-md-12 mb-3">
+              <div class="col-md-12 mb-3">
+                <button type="submit" *ngIf="!isEditing" class="btn btn-primary me-3">
+                  <i class="fas fa-plus"></i> Add Report
+                </button>
+                <button type="submit" *ngIf="isEditing" class="btn btn-warning me-3">
+                  <i class="fas fa-pencil-alt"></i> Update Report
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="clearForm()">
+                  <i class="fas fa-times"></i> Clear
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <!-- Reports List -->
+<div class="row" *ngIf="!showForm">
+  <div class="col-md-4" *ngFor="let report of paginatedReports">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Accident Report #{{ report.id }}</h5>
+        <p><strong>Patient:</strong> {{ report.patient.firstName }} {{ report.patient.lastName }}</p>
+        <p><strong>Department:</strong> {{ report.department }}</p>
+        <p><strong>Date:</strong> {{ report.injuryDate }}</p>
+        <p><strong>Time:</strong> {{ report.injuryTime }}</p>
+        <p><strong>Cause of Injury:</strong> {{ report.causeOfInjury }}</p>
+        <p><strong>Incident Details:</strong> {{ report.incidentDetails }}</p>
+        <p><strong>Preventive Action:</strong> {{ report.preventiveAction }}</p>
+        <p><strong>Reporter Name:</strong> {{ report.reporterName }}</p>
+        <p><strong>Department Head Name:</strong> {{ report.departmentHeadName }}</p>
+        <p><strong>Witnesses:</strong></p>
+        <ol>
+          <li *ngFor="let witness of report.witnesses">
+            {{ witness.firstName }} {{ witness.lastName }}
+          </li>
+        </ol>
+        <a (click)="editAccidentReport(report.id)" class="icon-button me-3">
+          <i class="fas fa-pencil"></i>
+        </a>
+        <a (click)="deleteAccidentReport(report.id)" class="icon-button me-3">
+          <i class="fas fa-trash-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pagination Controls -->
+<div class="pagination-controls d-flex justify-content-between mt-3">
+  <button class="btn btn-light" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button class="btn btn-light" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+</div>

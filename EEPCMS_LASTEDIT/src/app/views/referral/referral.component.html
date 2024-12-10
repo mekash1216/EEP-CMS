@@ -1,0 +1,86 @@
+<!-- Bootstrap Card Container -->
+<div class="card">
+  <div class="card-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <!-- Search Bar with Icon -->
+      <div class="input-group" style="max-width: 250px;">
+        <input type="text" class="form-control form-control-sm" placeholder="Search referrals..." (input)="onSearch($event)" />
+        <span class="input-group-text">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+
+      <!-- Button to View Patient List -->
+      <button class="btn btn-info btn-sm" (click)="navigateToPatientList()">
+        <i class="fas fa-user"></i> Patient List
+      </button>
+
+      <!-- Page Size Selector -->
+      <select class="form-select form-select-sm me-2" style="width: auto;" (change)="onPageSizeChange($event)">
+        <option *ngFor="let size of pageSizes" [value]="size" [selected]="size === pageSize">
+          {{ size }} per page
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Referral Details Table -->
+  <div class="card-body">
+    <div *ngIf="referrals.length > 0">
+      <table class="table table-striped mt-3">
+        <thead>
+          <tr>
+            <th scope="col">Referral Date</th>
+            <th scope="col">From</th>
+            <th scope="col">Investigation Result</th>
+            <th scope="col">Reason</th>
+            <th scope="col">Patient Name</th>
+            <th scope="col">Examiner Name</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let referral of paginatedReferrals">
+            <td>{{ referral.referralDate }}</td>
+            <td>{{ referral.from }}</td>
+            <td>{{ referral.investigationResult }}</td>
+            <td>{{ referral.reason }}</td>
+            <td>{{ referral.examiner.patientName }}</td>
+            <td>{{ referral.examiner.regExaminerName }}</td>
+            <td>
+              <div class="action-buttons">
+                <button type="button" (click)="viewReferral(referral.id)" aria-label="View Referral" class="btn btn-link text-info p-0">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button type="button" (click)="openEditModal(referral)" aria-label="Edit Referral" class="btn btn-link text-warning p-0">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button type="button" (click)="deleteReferral(referral.id)" aria-label="Delete Referral" class="btn btn-link text-danger p-0">
+                  <i class="fas fa-trash-alt"></i>
+                </button>                                           
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="changePage(currentPage - 1)">Previous</a>
+          </li>
+          <li *ngFor="let page of pages" class="page-item" [class.active]="currentPage === page">
+            <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div *ngIf="referrals.length === 0">
+      <p>No referrals available.</p>
+    </div>
+  </div>
+</div>

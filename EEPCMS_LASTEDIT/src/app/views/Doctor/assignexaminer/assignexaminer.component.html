@@ -1,0 +1,41 @@
+<div class="modal" [ngClass]="{ 'show': selectedAssignment !== null }">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Assign Examiner</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="assignExaminer()" #examinerForm="ngForm">
+          <!-- <div class="form-group mb-3">
+            <label for="id">ID Number:</label>
+            <input type="text" id="id" class="form-control" [value]="selectedAssignment?.id" readonly>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="id">ID Number:</label>
+            <input type="text" id="id" class="form-control" [value]="selectedAssignment?.patientId" readonly>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="id">ID Number:</label>
+            <input type="text" id="id" class="form-control" [value]="selectedAssignment?.doctorId" readonly>
+          </div>-->
+          <div class="form-group mb-3">
+            <label for="doctorId">Select Examiner:</label>
+            <select class="form-control" id="doctorId" name="doctorId" required [(ngModel)]="selectedDoctorId" #doctorId="ngModel">
+              <option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.firstName }}</option>
+            </select>
+          </div> 
+
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary me-2" [disabled]="examinerForm.invalid">Assign Examiner</button>
+            <button type="button" class="btn btn-secondary me-2" (click)="closeModal()">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

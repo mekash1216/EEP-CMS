@@ -1,0 +1,149 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h4 class="card-title mb-0">Add Physical Examination</h4>
+      <button class="btn btn-primary" (click)="navigateToAssessmentList()">
+        <i class="fa fa-list"></i> Examination List
+      </button>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="assessmentForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="heent" class="form-label">HEENT</label>
+              <textarea
+                id="heent"
+                formControlName="heent"
+                class="form-control custom-textarea"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="glands" class="form-label">Glands</label>
+              <textarea
+                id="glands"
+                formControlName="glands"
+                class="form-control custom-textarea"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="chest" class="form-label">Chest</label>
+              <textarea
+                id="chest"
+                formControlName="chest"
+                class="form-control custom-textarea"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="cvs" class="form-label">CVS</label>
+              <textarea
+                id="cvs"
+                formControlName="cvs"
+                class="form-control custom-textarea"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="abdomen" class="form-label">Abdomen</label>
+              <textarea
+                id="abdomen"
+                formControlName="abdomen"
+                class="form-control custom-textarea"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="code" class="form-label">Assessment</label>
+              <div style="position: relative;">
+                <select
+                  id="code"
+                  formControlName="code"
+                  class="form-control"
+                  style="padding-right: 30px; appearance: none; -webkit-appearance: none; -moz-appearance: none;"
+                >
+                  <option value="" disabled selected>Select...</option>
+                  <option *ngFor="let code of filteredCodes" [value]="code.code">
+                    {{ code.shortDescription }}
+                  </option>
+                </select>
+                <span style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;">
+                  &#9662; 
+                </span>
+              </div>
+            </div>
+            
+            
+            
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="genitoUninary" class="form-label"
+                >Genito-Urinary</label
+              >
+              <textarea
+                id="genitoUninary"
+                formControlName="genitoUninary"
+                class="form-control custom-textarea"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="musculoSkeleton" class="form-label"
+                >Musculo-Skeleton</label
+              >
+              <textarea
+                id="musculoSkeleton"
+                formControlName="musculoSkeleton"
+                class="form-control custom-textarea"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="skin" class="form-label">Skin</label>
+              <textarea
+                id="skin"
+                formControlName="skin"
+                class="form-control custom-textarea"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="cns" class="form-label">CNS</label>
+              <textarea
+                id="cns"
+                formControlName="cns"
+                class="form-control custom-textarea"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="mb-5">
+              <label for="date" class="form-label">Date</label>
+              <input
+                type="date"
+                id="date"
+                formControlName="date"
+                class="form-control"
+              />
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary me-2">
+                <i class="fa fa-plus"></i> Add
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="onCancel()"
+              >
+                <i class="fa fa-times"></i> Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,114 @@
+<div class="container mt-4">
+  <div *ngIf="loading">Loading...</div>
+  
+  <div *ngIf="!loading" class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+          <div>
+              <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." class="form-control" style="width: auto; display: inline-block; margin-right: 10px;">
+          </div>
+          <div>
+              <label for="itemsPerPage">Items per page:</label>
+              <select id="itemsPerPage" [(ngModel)]="itemsPerPage" class="form-control d-inline-block" (change)="onItemsPerPageChange()">
+                  <option *ngFor="let option of [5, 10, 20]" [value]="option">{{ option }}</option>
+              </select>
+          </div>
+      </div>
+      <table class="table table-striped mt-2">
+          <thead>
+              <tr>
+                  <th>General Appearance</th>
+                  <th>Vital Signs</th>
+                  <th>Head and Neck</th>
+                  <th>Cardiovascular</th>
+                  <th>Respiratory</th>
+                  <th>Abdomen</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let examination of paginatedExaminations()">
+                  <td>{{ examination.generalAppearance }}</td>
+                  <td>{{ examination.vitalSigns }}</td>
+                  <td>{{ examination.headAndNeck }}</td>
+                  <td>{{ examination.cardiovascular }}</td>
+                  <td>{{ examination.respiratory }}</td>
+                  <td>{{ examination.abdomen }}</td>
+                  <td>{{ examination.examinationDate | date:'short' }}</td>
+                  <td>
+                      <button class="btn btn-link p-0" (click)="openModal(examination)">
+                          <i class="fas fa-pencil-alt text-warning fa-lg"></i>
+                      </button>
+                      <button class="btn btn-link p-0" (click)="deleteExamination(examination.id)">
+                          <i class="fas fa-trash-alt text-danger fa-lg"></i>
+                      </button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+      <nav aria-label="Page navigation" class="d-flex justify-content-center">
+        <ul class="pagination">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="changePage(currentPage - 1)">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            </li>
+            <li class="page-item" *ngFor="let page of totalPages()" [class.active]="page === currentPage">
+                <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages().length">
+                <a class="page-link" (click)="changePage(currentPage + 1)">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" *ngIf="isModalOpen">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Edit Examination</h5>
+              <button type="button" class="close" (click)="closeModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+              <form [formGroup]="physicalExaminationForm" (ngSubmit)="saveExamination()">
+                  <div class="form-group">
+                      <label for="generalAppearance">General Appearance</label>
+                      <input id="generalAppearance" formControlName="generalAppearance" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="vitalSigns">Vital Signs</label>
+                      <input id="vitalSigns" formControlName="vitalSigns" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="headAndNeck">Head and Neck</label>
+                      <input id="headAndNeck" formControlName="headAndNeck" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="cardiovascular">Cardiovascular</label>
+                      <input id="cardiovascular" formControlName="cardiovascular" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="respiratory">Respiratory</label>
+                      <input id="respiratory" formControlName="respiratory" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="abdomen">Abdomen</label>
+                      <input id="abdomen" formControlName="abdomen" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <label for="date">Date</label>
+                      <input id="date" type="datetime-local" formControlName="examinationDate" class="form-control">
+                  </div>
+                  <button type="submit" class="btn btn-primary mt-3">
+                      <i class="fas fa-save"></i> Update
+                  </button>
+              </form>
+          </div>
+      </div>
+  </div>
+  <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()"></div>
+</div>

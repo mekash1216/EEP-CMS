@@ -1,0 +1,45 @@
+<c-card class="my-4">
+    <c-card-body>
+      <div class="container mt-1">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="email">CardNo</label>
+            <input type="email" id="cardNo" class="form-control" formControlName="cardNo">
+          </div>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" class="form-control" formControlName="firstName">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" class="form-control" formControlName="lastName">
+          </div>
+       
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" class="form-control" formControlName="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" id="phoneNumber" class="form-control" formControlName="phoneNumber">
+          </div>
+          <div class="form-group">
+            <label for="dateOfBirth">Date </label>
+            <input type="date" id="dateOfBirth" class="form-control" formControlName="dateOfBirth">
+          </div>
+      
+          <div class="form-group">
+            <label for="password">Age</label>
+            <input type="number" id="age" class="form-control" formControlName="age">
+          </div>
+          <button type="submit" class="btn btn-primary mt-3 me-2" [disabled]="registerForm.invalid">Register</button>
+          <button type="button" class="btn btn-secondary mt-3 ml-30" (click)="clearForm()">Clear</button>
+        </form>
+      </div>
+     
+    </c-card-body>
+  </c-card>
+  

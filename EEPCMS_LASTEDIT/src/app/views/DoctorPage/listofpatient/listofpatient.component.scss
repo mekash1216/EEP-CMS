@@ -1,0 +1,65 @@
+/* Example CSS to adjust spacing between buttons */
+.dropdown-toggle {
+    margin-right: 10px; 
+    
+  }
+
+  .pagination {
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .btn-space {
+    margin-right: 5px; 
+  }
+
+  
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+   margin-top: 50px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+   //background-color: rgba(0,0,0,0.4);
+  }
+  
+
+  .modal.show {
+    display: block;
+    
+  }
+  
+  /* Modal content styles */
+  .modal-content {
+   
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+  
+    position: relative;
+  }
+  
+  
+
+
+  .modal-header .close {
+    color: #000; 
+    font-size: 2rem; 
+    line-height: 1; 
+  }
+  
+
+  .close {
+    position: absolute;
+    right: 15px;
+    top: 10px; 
+    background: none; 
+    border: none; 
+    color: inherit; 
+    font-size: 1.5rem; 
+    cursor: pointer; 
+  }

@@ -1,0 +1,109 @@
+<div *ngIf="test">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Test Details</h5>
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Category:</strong> {{ test.category }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Test Name:</strong> {{ test.test }}</p>
+        </div>
+      </div>
+      
+      <!-- Special test specific details -->
+      <div *ngIf="isSpecial">
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Result:</strong> {{ test.selectionone }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Cell Count:</strong> {{ test.cellCount }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Consistency:</strong> {{ test.consistency }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Color:</strong> {{ test.color }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Display Sub-tests for CBC in a table format -->
+      <div *ngIf="test.test === 'cbc'">
+        <div *ngIf="test.subTests && test.subTests.length > 0; else noSubTests">
+          <table class="table borderless">
+            <thead>
+              <tr>
+                <th>Sub Test Name</th>
+                <th>Result</th>
+                <th>Gender</th>
+                <th>Units</th>
+                <th>Reference Range</th>
+                <th>Severity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let subTest of pagedSubTests">
+                <td>{{ subTest.name }}</td>
+                <td>{{ subTest.result }}</td>
+                <td>{{ subTest.gender }}</td>
+                <td>{{ subTest.units }}</td>
+                <td>{{ subTest.referenceRange }}</td>
+                <td>{{ subTest.severity }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Pagination Controls with Icons -->
+          <div class="pagination-controls d-flex justify-content-between mt-3">
+            <button class="btn btn-secondary" (click)="previousPage()" [disabled]="!hasPreviousPage()">
+              <i class="fa fa-chevron-left"></i> 
+            </button>
+            <span>Page {{ currentPage }} of {{ totalPages }}</span>
+            <button class="btn btn-secondary" (click)="nextPage()" [disabled]="!hasNextPage()">
+               <i class="fa fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <ng-template #noSubTests>
+          <p>No sub-tests available.</p>
+        </ng-template>
+      </div>
+      
+      <!-- Non-special test specific details -->
+      <div *ngIf="!isSpecial && test.test != 'cbc'">
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Result:</strong> {{ test.result }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Unit:</strong> {{ test.units }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Gender:</strong> {{ test.gender }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Severity:</strong> {{ test.severity }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Age:</strong> {{ test.age }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Is Pregnant:</strong> {{ test.isPregnant }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Phase:</strong> {{ test.phase }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Reference Range:</strong> {{ test.referenceRange }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete Button -->
+      <div class="text-right mt-3">
+          <button class="btn btn-danger" (click)="onDelete()"><i class="fa fa-trash"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,205 @@
+/* Table styles */
+.table-wrapper {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: hsl(0, 21%, 86%);
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 150px;
+  }
+  
+  .single-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-right: 1px solid #ddd;
+    min-width: 100px;
+    transition: width 0.3s ease;
+  }
+  
+  .single-line:last-child {
+    border-right: none;
+  }
+  
+  .single-line:hover {
+    width: auto;
+  }
+  
+  /* Modal styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+ 
+  }
+  
+  .modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+    
+   }
+  
+  .modal-content {
+    background-color: hsl(0, 21%, 86%);
+    padding: 20px;
+    //border: 30px solid #fefefe;
+    width: 1000px;
+    max-width: 4000px;
+    text-align: left;
+    position: relative;
+    margin-bottom: 200px;
+  }
+  
+  .close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .table-wrapper {
+    overflow-x: auto; /* Ensure horizontal scroll if needed */
+  }
+  
+  .table {
+    width: 100%; /* Ensure table takes full width */
+    border-collapse: collapse; /* Collapse borders between cells */
+  }
+  
+  .table th, .table td {
+    padding: 8px; /* Adjust padding for better cell spacing */
+    border: 1px solid #ddd; /* Add borders between cells */
+  }
+  
+  .table th {
+    background-color: #f2f2f2; /* Light background for header */
+  }
+  
+  .table td {
+    background-color: #ffffff; /* White background for cells */
+  }
+  
+  .table th, .table td {
+    text-align: left; /* Align text to the left within cells */
+    vertical-align: top; /* Align content to the top */
+  }
+  
+  .table td ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .table td ul li {
+    margin-bottom: 4px; /* Adjust margin between prescription items */
+  }
+  
+  /* Buttons inside table cells */
+  .table td button {
+    margin-right: 4px; /* Adjust spacing between buttons */
+  }
+  
+
+
+
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black overlay */
+  z-index: 1000; /* adjust as needed to ensure it overlays other content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Container */
+.modal-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* subtle box shadow */
+  width: 60%; /* adjust width as per your design */
+  max-width: 600px; /* maximum width of the modal */
+  overflow-y: auto; /* enable scrolling if content exceeds modal height */
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0; /* light gray bottom border */
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* Modal Body */
+.modal-body {
+  padding-bottom: 20px;
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 1px solid #e0e0e0; /* light gray top border */
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.modal-footer button {
+  margin-left: 10px;
+}
+
+/* Close Button */
+.close-modal {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2rem;
+  color: #777777;
+}
+
+.close-modal:hover {
+  color: #333333;
+}

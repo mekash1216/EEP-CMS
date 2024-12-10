@@ -1,0 +1,48 @@
+
+.search-input {
+    max-width: 300px;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+   margin-top: 50px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+   //background-color: rgba(0,0,0,0.4);
+  }
+  
+
+  .modal.show {
+    display: block;
+    
+  }
+  
+  /* Modal content styles */
+  .modal-content {
+   
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width:80%;
+  
+    position: relative;
+  }
+  
+  
+  .btn-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+   
+   
+  }
+
+ 
+
+  

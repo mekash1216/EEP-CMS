@@ -1,0 +1,222 @@
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+ margin-top: 50px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+ //background-color: rgba(0,0,0,0.4);
+}
+
+/* Show modal when 'show' class is applied */
+.modal.show {
+  display: block;
+  
+}
+
+/* Modal content styles */
+.modal-content {
+ 
+  margin: 15% auto; /* Adjust the modal vertical position */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100%;
+  max-width: 800px;
+  position: relative;
+}
+
+/* Close button styles */
+.close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: rgb(22, 11, 11);
+ // padding-top: 50px;
+  //padding-left: 5px;
+}
+
+
+
+
+
+
+  
+  /* Table wrapper for scrolling and cell styles */
+.table-wrapper {
+    max-height: 400px; /* Set max height to enable vertical scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+  
+  .table {
+    width: 100%; /* Full width */
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Display ellipsis for overflow text */
+    max-width: 150px; /* Set max width for each cell */
+  }
+  
+  /* Add border-right for separation between cells */
+  .table td {
+    border-right: 1px solid #ddd;
+  }
+  
+  /* Style the last cell to remove the right border */
+  .table td:last-child {
+    border-right: none;
+  }
+  
+  .btn-space {
+    margin-right: 6px;
+  }
+  
+
+
+  
+  /* CSS for Assign Modal */
+.assign-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assign-modal .modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 400px; /* Adjust width as needed */
+}
+
+
+/* assign-modal.css */
+
+.modal2 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 80%;
+  max-width: 600px; /* Adjust maximum width as needed */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensure modal is above other content */
+}
+
+.modal2 .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.modal2 .modal-header .modal-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal2 .modal-header .close {
+  cursor: pointer;
+}
+
+.modal2 .modal-body {
+  padding-bottom: 20px;
+}
+
+.modal2 .form-group {
+  margin-bottom: 15px;
+}
+
+.modal2 .form-group label {
+  font-weight: bold;
+}
+
+.modal2 .form-control {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal2 .btn {
+  padding: 8px 16px;
+  margin-right: 10px;
+}
+
+.modal2 .btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.modal2 .btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+}
+
+.modal2 .modal-footer {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+  margin-top: 10px;
+  text-align: right;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  z-index: 900; /* Ensure backdrop is behind the modal */
+}
+
+
+
+.table {
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .btn-space {
+    margin-right: 5px;
+  }
+
+  .table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .thead-dark {
+    background-color: #343a40;
+    color: white;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+}
+

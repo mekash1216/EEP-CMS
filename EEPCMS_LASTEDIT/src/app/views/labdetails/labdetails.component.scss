@@ -1,0 +1,36 @@
+
+  .card-header {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .category-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  
+ 
+  @media print {
+    .btn {
+      display: none;
+    }
+  
+    body {
+      font-size: 12pt; 
+    }
+  
+    .request-details {
+      margin: 0; 
+      padding: 0;
+    }
+  
+  }
+  

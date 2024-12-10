@@ -1,0 +1,78 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050; 
+}
+
+.modal-dialog {
+  width: 600px; /* Use a fixed width */
+  max-width: 100%; /* Ensure it doesn't exceed the viewport */
+  margin: 1.75rem auto;
+}
+
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between title and close button */
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.btn-close {
+  background: transparent;
+  border: none; 
+  font-size: 2rem; 
+  color: #000; 
+  opacity: 0.5; 
+  cursor: pointer; 
+ 
+}
+
+.btn-close:hover {
+  opacity: 1; /* Fully opaque on hover */
+}
+
+
+.modal-body {
+  position: relative;
+  padding: 1rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: rgb(209, 14, 14);
+}
+
+#examinerId {
+  display: none;
+}

@@ -1,0 +1,96 @@
+<div class="container mt-4">
+
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="card-title mb-0">Physical Examination</h4>
+        <div class="d-flex">
+          <!-- Dropdown for Page Size -->
+          <select class="form-select me-2" (change)="onPageSizeChange($event)">
+            <option *ngFor="let size of pageSizes" [value]="size" [selected]="size === pageSize">{{ size }} per page</option>
+          </select>
+          <!-- Search Input -->
+          <input 
+            type="text" 
+            class="form-control me-2" 
+            placeholder="Search..." 
+            (input)="filterAssessments($event)"
+          >
+          <!-- <a class="btn btn-primary" routerLink="/physical-assessments/create">Create New</a> -->
+        </div>
+      </div>
+      <div class="card-body">
+        <div *ngIf="filteredAssessments.length > 0; else noData">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+             
+                <th>Patient Name</th> 
+                <th>HEENT</th>
+                <th>Glands</th>
+                <th>Chest</th>
+                <th>CVS</th>
+                <th>Abdomen</th>
+                <th>Genito-Urinary</th>
+                <th>Musculo-Skeleton</th>
+                <th>Skin</th>
+                <th>CNS</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let assessment of paginatedAssessments">
+                <td>{{ patientNames[assessment.patientId] || 'Unknown' }}</td>
+                <td>{{ assessment.heent }}</td>
+                <td>{{ assessment.glands }}</td>
+                <td>{{ assessment.chest }}</td>
+                <td>{{ assessment.cvs }}</td>
+                <td>{{ assessment.abdomen }}</td>
+                <td>{{ assessment.genitoUninary }}</td>
+                <td>{{ assessment.musculoSkeleton }}</td>
+                <td>{{ assessment.skin }}</td>
+                <td>{{ assessment.cns }}</td>
+                <td>{{ assessment.date | date }}</td>
+                <td>
+                      <button class="btn btn-link p-0" (click)="edit(assessment.id)">
+                        <i class="fas fa-pencil-alt text-warning fa-lg"></i>
+                      </button>
+                        <button class="btn btn-link p-0" (click)="delete(assessment.id)">
+                            <i class="fas fa-trash-alt text-danger fa-lg"></i>
+                        </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Pagination Controls -->
+          <nav aria-label="Page navigation ml-100">
+            <ul class="pagination justify-content-center ">
+              <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
+                <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item" [ngClass]="{'active': currentPage === i}" *ngFor="let i of pageNumbers">
+                <a class="page-link" (click)="changePage(i)">{{ i }}</a>
+              </li>
+              <li class="page-item" [ngClass]="{'disabled': currentPage === totalPages}">
+                <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <ng-template #noData>
+          <p>No data available.</p>
+        </ng-template>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end mb-3">
+      <div class="user-info">
+        {{ currentUser?.firstName || 'User' }}
+      </div>
+      
+    </div>
+  </div>
+  

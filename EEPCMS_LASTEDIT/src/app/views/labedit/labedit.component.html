@@ -1,0 +1,150 @@
+<div *ngIf="request" class="request-details">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h2>Edit Request ID: {{ request.id }}</h2>
+    <button class="btn btn-success ms-2" (click)="saveChanges()">Save</button>
+  </div>
+  <div class="card-body">
+    <!-- Biochemistry Section -->
+    <div *ngIf="request.isBiochemistryChecked" class="category-card">
+      <h3>Biochemistry</h3>
+      <ul>
+        <li *ngFor="let item of biochemistryItems">
+          <label>
+            <input type="checkbox" [(ngModel)]="item.value" />
+            {{ item.key }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bacteriology Section -->
+    <div *ngIf="request.isBacteriologyChecked" class="category-card">
+      <h3>Bacteriology</h3>
+      <ul>
+        <li *ngFor="let item of bacteriologyItems">
+          <label>
+            <input type="checkbox" [(ngModel)]="item.value" />
+            {{ item.key }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Serology Section -->
+    <div *ngIf="request.isSerologyChecked" class="category-card">
+      <h3>Serology</h3>
+      <ul>
+        <li *ngFor="let item of serologyItems">
+          <label>
+            <input type="checkbox" [(ngModel)]="item.value" />
+            {{ item.key }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Electrolyte Section -->
+    <div *ngIf="request.isElectrolyteChecked" class="category-card">
+      <h3>Electrolyte</h3>
+      <ul>
+        <li *ngFor="let item of electrolyteItems">
+          <label>
+            <input type="checkbox" [(ngModel)]="item.value" />
+            {{ item.key }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Cancer Marker Section -->
+    <div *ngIf="request.isCancerMarkerChecked" class="category-card">
+      <h3>Cancer Marker</h3>
+      <ul>
+        <li *ngFor="let item of cancerMarkerItems">
+          <label>
+            <input type="checkbox" [(ngModel)]="item.value" />
+            {{ item.key }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Cardiac Marker Section -->
+    <div *ngIf="request.isCardiacMarkerChecked" class="category-card">
+      <h3>Cardiac Marker</h3>
+      <ul>
+        <li *ngFor="let item of cardiacMarkerItems">
+          <label>
+            <input type="checkbox" [(ngModel)]="item.value" />
+            {{ item.key }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Coagulation Section -->
+    <div *ngIf="request.isCoagulationChecked" class="category-card">
+      <h3>Coagulation</h3>
+      <ul>
+        <li *ngFor="let item of coagulationItems">
+          <label>
+            <input type="checkbox" [(ngModel)]="item.value" />
+            {{ item.key }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Hormone Section -->
+    <div *ngIf="request.isHormoneChecked" class="category-card">
+      <h3>Hormone</h3>
+      <ul>
+        <li *ngFor="let item of hormoneItems">
+          <label>
+            <input type="checkbox" [(ngModel)]="item.value" />
+            {{ item.key }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Other Lab Section -->
+    <div *ngIf="request.isOtherLabChecked" class="category-card">
+      <h3>Other Lab</h3>
+      <ul>
+        <li *ngFor="let item of otherLabItems">
+          <label>
+            <input type="checkbox" [(ngModel)]="item.value" />
+            {{ item.key }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Parasitology Section -->
+    <div *ngIf="request.isParasitologyChecked" class="category-card">
+      <h3>Parasitology</h3>
+      <ul>
+        <li *ngFor="let item of parasitologyItems">
+          <label>
+            <input type="checkbox" [(ngModel)]="item.value" />
+            {{ item.key }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Hematology Section -->
+    <div *ngIf="request.isHematologyChecked" class="category-card">
+      <h3>Hematology</h3>
+      <ul>
+        <li *ngFor="let item of hematologyItems">
+          <label>
+            <input type="checkbox" [(ngModel)]="item.value" />
+            {{ item.key }}
+          </label>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

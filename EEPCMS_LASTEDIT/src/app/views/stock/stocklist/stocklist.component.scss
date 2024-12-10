@@ -1,0 +1,26 @@
+  .btn-space {
+    margin-right: 5px; 
+  }
+  .modal-header .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+  }
+  
+  .modal-header .close span {
+    font-size: 2rem;
+  }
+  
+  .btn-icon {
+    background: none; 
+    border: none;
+    cursor: pointer; 
+    padding: 0; 
+    color: #007bff; 
+}
+
+.btn-icon:hover {
+    color: #0056b3; 
+}

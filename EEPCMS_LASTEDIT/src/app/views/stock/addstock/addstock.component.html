@@ -1,0 +1,36 @@
+<!-- add-stock.component.html -->
+<div class="container">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" class="form-control" [(ngModel)]="newStock.name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="code">Code:</label>
+        <input type="text" id="code" class="form-control" [(ngModel)]="newStock.code" name="code" required>
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" id="price" class="form-control" [(ngModel)]="newStock.price" name="price" required>
+      </div>
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" class="form-control" [(ngModel)]="newStock.quantity" name="quantity" required>
+      </div>
+      <div class="form-group">
+        <label for="manufacturer">Manufacturer:</label>
+        <input type="text" id="manufacturer" class="form-control" [(ngModel)]="newStock.manufacturer" name="manufacturer" required>
+      </div>
+      <div class="form-group">
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="date" id="expiryDate" class="form-control" [(ngModel)]="newStock.expiryDate" name="expiryDate" required>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">
+        <i class="fas fa-save"></i>
+        Save Stock
+      </button>
+      
+      
+    </form>
+  </div>
+  

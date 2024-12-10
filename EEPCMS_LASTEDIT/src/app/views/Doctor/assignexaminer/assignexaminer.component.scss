@@ -1,0 +1,19 @@
+/* assignexaminer.component.css */
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+    display: none; /* Initially hide the modal */
+  }
+  
+  .show {
+    display: block; /* Show the modal when 'show' class is applied */
+  }
+  .close{
+    margin-left: 300px;
+  }

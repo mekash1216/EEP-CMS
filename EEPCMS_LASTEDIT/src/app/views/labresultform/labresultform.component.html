@@ -1,0 +1,339 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h2>Register Test Result</h2>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="saveTestResult()">
+        <!-- Category Selection -->
+        <div class="form-group">
+          <label for="category">Category:</label>
+          <select id="category" class="form-control" [(ngModel)]="newTestResult.Category" name="category"
+            (change)="onCategoryChange()">
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
+        </div>
+
+        <!-- Test Name Selection -->
+        <div class="form-group">
+          <label for="test">Test:</label>
+          <select id="test" class="form-control" [(ngModel)]="newTestResult.Test" name="test"
+            (change)="updateTestSelections(); updatePhaseOptions()">
+            <option *ngFor="let test of availableTests" [value]="test">{{ test }}</option>
+          </select>
+        </div>
+
+
+
+
+        <!-- Current Sub-Test Display -->
+        <div
+          *ngIf="newTestResult.Test === 'cbc' && currentSubTestIndex >= 0 && currentSubTestIndex < newTestResult.subTests.length">
+          <div class="form-group mt-2">
+            <!-- Gender Field (Common for all sub-tests) -->
+            <!-- <label for="gender">Gender:</label>
+            <select id="gender" class="form-control" [(ngModel)]="newTestResult.subTests.gender" name="gender">
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select> -->
+
+            <label for="subTestName-{{currentSubTestIndex}}">Sub Test Name:</label>
+            <input id="subTestName-{{currentSubTestIndex}}" class="form-control" type="text"
+              [(ngModel)]="newTestResult.subTests[currentSubTestIndex].name"
+              name="subTestName-{{currentSubTestIndex}}" />
+
+            <label for="subTestResult-{{currentSubTestIndex}}">Result:</label>
+            <input id="subTestResult-{{currentSubTestIndex}}" class="form-control" type="number"
+              [(ngModel)]="newTestResult.subTests[currentSubTestIndex].result"
+              name="subTestResult-{{currentSubTestIndex}}" />
+
+              <label for="subTestGender-{{currentSubTestIndex}}">Gender:</label>
+              <input id="subTestGender-{{currentSubTestIndex}}" class="form-control" type="text"
+                [(ngModel)]="newTestResult.subTests[currentSubTestIndex].gender"
+                name="subTestGender-{{currentSubTestIndex}}" />
+          </div>
+
+          <!-- Navigation Icons -->
+          <div class="navigation-icons">
+            <i class="fas fa-arrow-left me-3" (click)="moveToPreviousSubTest()"></i>
+            <i class="fas fa-arrow-right" (click)="moveToNextSubTest()"></i>
+          </div>
+        </div>
+
+
+
+        <!-- Age Field -->
+        <div class="form-group" *ngIf="!isSpecialTest() && newTestResult.Test != 'urinalysis'">
+          <label for="age">Age:</label>
+          <input id="age" class="form-control" type="number" [(ngModel)]="newTestResult.Age" name="age" />
+        </div>
+
+        <!-- Is Pregnant Field -->
+        <div class="form-group" *ngIf="!isSpecialTest()&& newTestResult.Test != 'urinalysis'">
+          <label for="isPregnant">Is Pregnant?</label>
+          <input id="isPregnant" class="form-check-input" type="checkbox" [(ngModel)]="newTestResult.IsPregnant"
+            name="isPregnant" />
+        </div>
+
+        <div class="form-group" *ngIf="newTestResult.IsPregnant && phaseOptionsForTest.length > 0">
+          <label for="phase">Phase:</label>
+          <select id="phase" class="form-control" [(ngModel)]="newTestResult.Phase" name="phase">
+            <option *ngFor="let phase of phaseOptionsForTest" [value]="phase">{{ phase }}</option>
+          </select>
+        </div>
+
+        <!-- Result Field (Text for Blood Film and Morphology, Number for others) -->
+        <div class="form-group" *ngIf="!isSpecialTest()&& newTestResult.Test != 'urinalysis'">
+          <label for="result">Result:</label>
+          <input id="result" class="form-control" type="text" [(ngModel)]="newTestResult.Result" name="result" />
+        </div>
+
+        <!-- Special Test Fields -->
+        <div class="form-group" *ngIf="isSpecialTest()">
+          <label for="color">Color:</label>
+          <select id="color" class="form-control" [(ngModel)]="newTestResult.color" name="color">
+            <option *ngIf="!colorOptionsForTest.length" value="No">No</option>
+            <option *ngFor="let option of colorOptionsForTest" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+
+        <div class="form-group" *ngIf="isSpecialTest()">
+          <label for="consistency">Consistency:</label>
+          <select id="consistency" class="form-control" [(ngModel)]="newTestResult.consistency" name="consistency">
+            <option *ngFor="let option of consistencyOptionsForTest" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+
+        <div class="form-group" *ngIf="isSpecialTest()">
+          <label for="selectionone">Select Result:</label>
+          <select id="selectionone" class="form-control" [(ngModel)]="newTestResult.selectionone" name="selectionone">
+            <option *ngFor="let option of selectionOneOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+
+        <div class="form-group" *ngIf="isSpecialTest()">
+          <label for="cellCount">Cell Count:</label>
+          <select id="cellCount" class="form-control" [(ngModel)]="newTestResult.cellCount" name="cellCount">
+            <option *ngFor="let option of cellCountOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+
+        <!-- Additional Fields for Non-Special Tests -->
+        <div class="form-group" *ngIf="!isSpecialTest()&& newTestResult.Test != 'urinalysis'">
+          <label for="gender">Gender:</label>
+          <input id="gender" class="form-control" type="text" [(ngModel)]="newTestResult.Gender" name="gender" />
+        </div>
+
+
+        <!-- Urine Dipsticks Test Form Fields -->
+        <div *ngIf="newTestResult.Test === 'urinalysis'">
+          <!-- PH Field -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="ph">PH:</label>
+                <input id="ph" class="form-control" type="number" [(ngModel)]="newTestResult.ph" name="ph" />
+              </div>
+            </div>
+            <!-- Specific Gravity Field -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="specificGravity">Specific Gravity:</label>
+                <input id="specificGravity" class="form-control" type="number"
+                  [(ngModel)]="newTestResult.specificGravity" name="specificGravity" />
+              </div>
+            </div>
+          </div>
+          <!-- Binary and Intensity Fields -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="leukocyteEsterase">Leukocyte Esterase:</label>
+                <div class="input-group">
+                  <select id="leukocyteEsterase" class="form-control" [(ngModel)]="newTestResult.leukocyteEsterase"
+                    name="leukocyteEsterase">
+
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
+                  </select>
+                  <ng-container *ngIf="newTestResult.leukocyteEsterase === 'Positive'">
+                    <select id="leukocyteEsteraseIntensity" class="form-control"
+                      [(ngModel)]="newTestResult.leukocyteEsteraseIntensity" name="leukocyteEsteraseIntensity">
+
+                      <option value="Trace">Trace</option>
+                      <option value="+1">+1</option>
+                      <option value="+2">+2</option>
+                      <option value="+3">+3</option>
+                    </select>
+                  </ng-container>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label for="nitrite">Nitrite:</label>
+                <div class="input-group">
+                  <select id="nitrite" class="form-control" [(ngModel)]="newTestResult.nitrite" name="nitrite">
+
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
+                  </select>
+                  <ng-container *ngIf="newTestResult.nitrite === 'Positive'">
+                    <select id="nitriteIntensity" class="form-control" [(ngModel)]="newTestResult.nitriteIntensity"
+                      name="nitriteIntensity">
+
+                      <option value="Trace">Trace</option>
+                      <option value="+1">+1</option>
+                      <option value="+2">+2</option>
+                      <option value="+3">+3</option>
+                    </select>
+                  </ng-container>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="urobilinogen">Urobilinogen:</label>
+                <div class="input-group">
+                  <select id="urobilinogen" class="form-control" [(ngModel)]="newTestResult.urobilinogen"
+                    name="urobilinogen">
+
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
+                  </select>
+                  <ng-container *ngIf="newTestResult.urobilinogen === 'Positive'">
+                    <select id="urobilinogenIntensity" class="form-control"
+                      [(ngModel)]="newTestResult.urobilinogenIntensity" name="urobilinogenIntensity">
+
+                      <option value="Trace">Trace</option>
+                      <option value="+1">+1</option>
+                      <option value="+2">+2</option>
+                      <option value="+3">+3</option>
+                    </select>
+                  </ng-container>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="protein">Protein:</label>
+                <div class="input-group">
+                  <select id="protein" class="form-control" [(ngModel)]="newTestResult.protein" name="protein">
+
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
+                  </select>
+                  <ng-container *ngIf="newTestResult.protein === 'Positive'">
+                    <select id="proteinIntensity" class="form-control" [(ngModel)]="newTestResult.proteinIntensity"
+                      name="proteinIntensity">
+
+                      <option value="Trace">Trace</option>
+                      <option value="+1">+1</option>
+                      <option value="+2">+2</option>
+                      <option value="+3">+3</option>
+                    </select>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="glucose">Glucose:</label>
+                <div class="input-group">
+                  <select id="glucose" class="form-control" [(ngModel)]="newTestResult.glucose" name="glucose">
+
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
+                  </select>
+                  <ng-container *ngIf="newTestResult.glucose === 'Positive'">
+                    <select id="glucoseIntensity" class="form-control" [(ngModel)]="newTestResult.glucoseIntensity"
+                      name="glucoseIntensity">
+
+                      <option value="Trace">Trace</option>
+                      <option value="+1">+1</option>
+                      <option value="+2">+2</option>
+                      <option value="+3">+3</option>
+                    </select>
+                  </ng-container>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="bloodHemoglobin">Blood/Hemoglobin:</label>
+                <div class="input-group">
+                  <select id="bloodHemoglobin" class="form-control" [(ngModel)]="newTestResult.bloodHemoglobin"
+                    name="bloodHemoglobin">
+
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
+                  </select>
+                  <ng-container *ngIf="newTestResult.bloodHemoglobin === 'Positive'">
+                    <select id="bloodHemoglobinIntensity" class="form-control"
+                      [(ngModel)]="newTestResult.bloodHemoglobinIntensity" name="bloodHemoglobinIntensity">
+
+                      <option value="Trace">Trace</option>
+                      <option value="+1">+1</option>
+                      <option value="+2">+2</option>
+                      <option value="+3">+3</option>
+                    </select>
+                  </ng-container>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="ketones">Ketones:</label>
+                <div class="input-group">
+                  <select id="ketones" class="form-control" [(ngModel)]="newTestResult.ketones" name="ketones">
+
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
+                  </select>
+                  <ng-container *ngIf="newTestResult.ketones === 'Positive'">
+                    <select id="ketonesIntensity" class="form-control" [(ngModel)]="newTestResult.ketonesIntensity"
+                      name="ketonesIntensity">
+
+                      <option value="Trace">Trace</option>
+                      <option value="+1">+1</option>
+                      <option value="+2">+2</option>
+                      <option value="+3">+3</option>
+                    </select>
+                  </ng-container>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="bilirubin">Bilirubin:</label>
+                <div class="input-group">
+                  <select id="bilirubin" class="form-control" [(ngModel)]="newTestResult.bilirubin" name="bilirubin">
+
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
+                  </select>
+                  <ng-container *ngIf="newTestResult.bilirubin === 'Positive'">
+                    <select id="bilirubinIntensity" class="form-control" [(ngModel)]="newTestResult.bilirubinIntensity"
+                      name="bilirubinIntensity">
+
+                      <option value="Trace">Trace</option>
+                      <option value="+1">+1</option>
+                      <option value="+2">+2</option>
+                      <option value="+3">+3</option>
+                    </select>
+                  </ng-container>
+                </div>
+              </div>
+
+              <!-- Test Date Field -->
+              <div class="form-group">
+                <label for="testDate">Date:</label>
+                <input id="testDate" class="form-control" type="text" [(ngModel)]="newTestResult.testDate"
+                  name="testDate" readonly />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn btn-primary" type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="modal-content custom-modal-width" >
+  <form [formGroup]="prescriptionItemForm" (ngSubmit)="onSubmit()">
+
+    <div class="modal-body">
+    
+
+      <!-- Form for adding new items -->
+      <div formArrayName="prescriptionItems" >
+        <div *ngFor="let item of prescriptionItems.controls; let i = index" [formGroupName]="i">
+<!--           
+          <div class="form-group" >
+            <label for="stockId">Stock ID:</label>
+            <input id="stockId" formControlName="stockId" [value]="selectedAssignment?.stockId" type="text" class="form-control">
+          </div> -->
+          <div class="form-group mb-3">
+            <label for="stockId">Stock Name:</label>
+            <select class="form-control" id="stockId" name="stockId" formControlName="stockId" (change)="checkExpiry($event)" required>
+              <option *ngFor="let stock of stock || []" [value]="stock.id"> {{ stock.name }}</option>
+            </select>
+            <div *ngIf="isExpired" class="text-danger">
+              <i class="fas fa-exclamation-triangle"></i> This stock has expired!
+            </div>
+            <div *ngIf="isExpiringSoon && !isExpired" class="text-warning">
+              <i class="fas fa-exclamation-circle"></i> This stock will expire soon (within 10 days)!
+            </div>
+          </div>
+          
+          
+
+          <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input id="quantity" formControlName="quantity" type="number" class="form-control">
+          </div>
+      
+        </div>
+      </div>
+      <div class="mt-3">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+      <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+    </div>
+  </form>
+</div>

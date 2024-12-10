@@ -1,0 +1,52 @@
+<div class="container mt-4">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h2>Test Results</h2>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Filter by Category or Test Name" (input)="onFilterChange($event)">
+        </div>
+        <div class="form-group ml-2">
+          <label for="pageSize">Show</label>
+          <select id="pageSize" class="form-control" (change)="onPageSizeChange($event)">
+            <option *ngFor="let size of [5, 10, 20]" [value]="size">{{ size }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- Table for displaying test results -->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Patient Name</th>
+              <th>Category</th>
+              <th>Test</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let test of filteredData | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+              <td>{{ patientNames[test.patientId] || 'N/A' }}</td>
+              <td>{{ test.category }}</td>
+              <td>{{ test.test }}</td>
+              <td>
+                <i class="fa" [ngClass]="{'fa-chevron-down': selectedTest === test && isDetailVisible, 'fa-chevron-right': selectedTest !== test || !isDetailVisible}" (click)="toggleDetails(test)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <!-- Pagination Controls -->
+        <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+  
+        <!-- Display the single detail component -->
+        <app-labtestresultdetail 
+        *ngIf="selectedTest && isDetailVisible" 
+        [test]="selectedTest" 
+        [isSpecial]="isSpecial"
+        (delete)="onDeleteTest()">
+      </app-labtestresultdetail>
+
+      </div>
+    </div>
+  </div>
+  

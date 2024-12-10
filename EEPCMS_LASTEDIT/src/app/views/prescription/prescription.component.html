@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="card-title mb-0">Prescriptions</h5>
+      <div class="d-flex">
+        <div class="input-group mr-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+          </div>
+          <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchTerm" (input)="filterPrescriptions()">
+        </div>
+        <select class="form-select w-auto" [(ngModel)]="itemsPerPage" (change)="setPage(1)">
+          <option value="5">5 per page</option>
+          <option value="10">10 per page</option>
+          <option value="15">15 per page</option>
+        </select>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table">
+          <thead>
+            <tr>
+              <th>Card Number</th>
+              <th>Date</th>
+              <th>Name of Patient</th>
+              <th>Inpatient</th>
+              <th>Outpatient</th>
+              <th>Emergency</th>
+              <th>Diagnosis</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prescription of pagedPrescriptions">
+              <td>{{ prescription.cardNumber }}</td>
+              <td>{{ prescription.prescriptiondate }}</td>
+              <td>{{ prescription.nameOfPatient }}</td>
+              <td>{{ prescription.isInpatient ? 'Yes' : 'No' }}</td>
+              <td>{{ prescription.isOutpatient ? 'Yes' : 'No' }}</td>
+              <td>{{ prescription.isEmergency ? 'Yes' : 'No' }}</td>
+              <td>{{ prescription.diagnosis }}</td>
+              <td>
+                <button class="btn btn-link p-0" (click)="openPrescription(prescription)" aria-label="View Prescription">
+                  <i class="fas fa-eye fa-lg text-info"></i>
+                </button>
+                <button class="btn btn-link p-0" (click)="deletePrescription(prescription)" aria-label="Delete Prescription">
+                  <i class="fas fa-trash fa-lg text-danger"></i>
+                </button>
+                <button class="btn btn-link p-0" (click)="editPrescription(prescription)" aria-label="Edit Prescription">
+                  <i class="fas fa-edit fa-lg text-primary"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <button class="btn btn-secondary" [disabled]="currentPage === 1" (click)="setPage(currentPage - 1)">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button class="btn btn-secondary" [disabled]="currentPage === totalPages" (click)="setPage(currentPage + 1)">Next</button>
+  </div>
+
+  <!-- Prescription Modal -->
+  <div class="modal modal-lg" [ngClass]="{'show': isModalOpen}">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <span class="close" (click)="closePrescriptionModal()">&times;</span>
+        <div *ngIf="selectedPrescription">
+          <h2 class="modal-title mb-3">Prescription Items</h2>
+          <div class="mb-3 text-center">
+            <label for="filter">Filter:</label>
+            <select id="filter" class="form-select w-auto mx-auto" [(ngModel)]="selectedFilter" (change)="setPage(1)">
+              <option value="all">All</option>
+              <option value="internal">Internal</option>
+              <option value="external">External</option>
+            </select>
+          </div>
+          <button class="btn btn-info mb-3" *ngIf="selectedFilter === 'external'" (click)="openExternalItemsModal(selectedPrescription)">
+            View External Items
+          </button>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of selectedPrescription.prescriptionItems" [ngClass]="{'d-none': !filterItems(item)}">
+                <td>{{ getStockName(item.stockId) }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.isInternal ? 'Internal' : 'External' }}</td>
+                <td>
+                  <button class="btn btn-success" *ngIf="item.isInternal && !item.isApproved" (click)="approvePrescriptionItem(item.id)">
+                    Approve
+                  </button>
+                  <span *ngIf="item.isApproved" class="btn btn-secondary disabled">Approved</span>
+                  <button class="btn btn-danger" *ngIf="!item.isInternal && !item.isApproved">Disapprove</button>
+                  <button class="btn btn-warning" *ngIf="!item.isInternal">External</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p *ngIf="!selectedPrescription.prescriptionItems || selectedPrescription.prescriptionItems.length === 0" class="text-muted mt-3">No items found.</p>
+        </div>
+        <p *ngIf="!selectedPrescription" class="text-muted mt-3">No prescription selected.</p>
+      </div>
+    </div>
+  </div>
+</div>

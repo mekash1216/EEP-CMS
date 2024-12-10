@@ -1,0 +1,1141 @@
+<form [formGroup]="laboratoryForm" (ngSubmit)="onSubmit()" class="container">
+  <!-- Request Information Card -->
+  <div class="card mb-3">
+    <div class="card-header">
+      <h5>Request Information</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="dateOfRequest" class="form-label">Date of Request:</label>
+          <input
+            id="dateOfRequest"
+            formControlName="dateOfRequest"
+            type="date"
+            class="form-control"
+          />
+        </div>
+
+        <div class="col-md-3">
+          <label for="patientName" class="form-label">Patient Name:</label>
+          <input
+            id="patientName"
+            formControlName="patientName"
+            type="text"
+            class="form-control"
+            readonly
+          />
+        </div>
+        <div class="col-md-3">
+          <label for="patientAge" class="form-label">Age:</label>
+          <input
+            id="patientAge"
+            formControlName="patientAge"
+            type="text"
+            class="form-control"
+           
+          />
+        </div>
+        <div class="col-md-3">
+          <label for="patientGender" class="form-label">Gender:</label>
+          <input
+            id="patientGender"
+            formControlName="patientGender"
+            type="text"
+            class="form-control"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <!-- Parasitology Section -->
+      <div class="card mb-3">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              formControlName="isParasitologyChecked"
+              class="form-check-input"
+            />
+            Parasitology
+          </label>
+          <div class="form-check mt-2">
+            <input
+              type="checkbox"
+              id="selectAllCoagulation"
+              class="form-check-input"
+              [checked]="isCoagulationSelectAllChecked"
+              (change)="toggleParasitologySelection($event)"
+            />
+            <label class="form-check-label" for="selectAllCoagulation">
+              <i class="fas fa-check-double"></i>
+            </label>
+          </div>
+        </div>
+        <div
+          class="card-body"
+          *ngIf="laboratoryForm.get('isParasitologyChecked')?.value"
+        >
+          <div formGroupName="parasitology" class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="stoolDirect"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Stool Direct</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="urinalysis"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Urinalysis</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hematology Section -->
+      <div class="card mb-3">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <label class="form-check-label mb-0">
+            <input
+              type="checkbox"
+              formControlName="isHematologyChecked"
+              class="form-check-input"
+            />
+            Hematology
+          </label>
+          <div class="form-check mb-0">
+            <input
+              type="checkbox"
+              id="selectAllHematology"
+              class="form-check-input"
+              [checked]="isHematologySelectAllChecked"
+              (change)="toggleHematologySelection($event)"
+            />
+            <label class="form-check-label" for="selectAllHematology">
+              <i class="fas fa-check-double"></i>
+            </label>
+          </div>
+        </div>
+
+        <div
+          class="card-body"
+          *ngIf="laboratoryForm.get('isHematologyChecked')?.value"
+        >
+          <div formGroupName="hematology" class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="cbc"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">CBC</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="hgb"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">HGB</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="esr"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">ESR</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="bloodGroup"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Blood Group</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="hba1c"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">HbA1c</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="bloodFilm"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Blood Film</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="peripheralMorphology"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">PeripheralMorphology</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="malariaByAgCard"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Malaria by Ag Card</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Biochemistry Section -->
+      <div class="card mb-3">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              formControlName="isBiochemistryChecked"
+              class="form-check-input"
+            />
+            Biochemistry
+          </label>
+          <div class="form-check mt-2">
+            <input
+              type="checkbox"
+              id="selectAllBiochemistry"
+              class="form-check-input"
+              [checked]="isBiochemistrySelectAllChecked"
+              (change)="toggleBiochemistrySelection($event)"
+            />
+            <label class="form-check-label" for="selectAllBiochemistry">
+              <i class="fas fa-check-double"></i>
+            </label>
+          </div>
+        </div>
+        <div
+          class="card-body"
+          *ngIf="laboratoryForm.get('isBiochemistryChecked')?.value"
+        >
+          <div formGroupName="biochemistry" class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="fbs"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">FBS</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="rbs"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">RBS</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="bun"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">BUN</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="creatinine"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Creatinine</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="sgot"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">SGOT</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="sgpt"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">SGPT</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="alkaPho"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Alkaline Phosphatase</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="tBilirubin"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Total Bilirubin</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="dBilirubin"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Direct Bilirubin</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="albumin"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Albumin</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="uricAcid"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Uric Acid</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="tProtein"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Total Protein</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="tCholesterol"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Total Cholesterol</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="hdl"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">HDL</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="ldl"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">LDL</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="triglyceride"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Triglyceride</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="amylase"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Amylase</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="ggt"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">GGT</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="lipase"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Lipase</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="ldh"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">LDH</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bacteriology Section -->
+      <div class="card mb-3">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              formControlName="isBacteriologyChecked"
+              class="form-check-input"
+            />
+            Bacteriology
+          </label>
+          <div class="form-check mt-2">
+            <input
+              type="checkbox"
+              id="selectAllBacteriology"
+              class="form-check-input"
+              [checked]="isBacteriologySelectAllChecked"
+              (change)="toggleBacteriologySelection($event)"
+            />
+            <label class="form-check-label" for="selectAllBacteriology">
+              <i class="fas fa-check-double"></i>
+            </label>
+          </div>
+        </div>
+        <div
+          class="card-body"
+          *ngIf="laboratoryForm.get('isBacteriologyChecked')?.value"
+        >
+          <div formGroupName="bacteriology" class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="afb"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">AFB</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="wetSmear"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Wet Smear</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="gramStrin"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Gram Strain</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="koh"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">KOH</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <!-- Serology Section -->
+      <div class="card mb-3">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              formControlName="isSerologyChecked"
+              class="form-check-input"
+            />
+            Serology
+          </label>
+          <div class="form-check mt-2">
+            <input
+              type="checkbox"
+              id="selectAllSerology"
+              class="form-check-input"
+              [checked]="isSerologySelectAllChecked"
+              (change)="toggleSerologySelection($event)"
+            />
+            <label class="form-check-label" for="selectAllSerology">
+              <i class="fas fa-check-double"></i>
+            </label>
+          </div>
+        </div>
+        <div
+          class="card-body"
+          *ngIf="laboratoryForm.get('isSerologyChecked')?.value"
+        >
+          <div formGroupName="serology" class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="vdrl"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">VDRL</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="widal"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Widal</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="weilFelix"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Weil Felix</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="bloodGroup"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Blood Group</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="xMatch"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Cross Match</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="hBsAg"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">HbsAg</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="hBsAb"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">HbsAb</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="hPyloriAb"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">H.Pylori Ab</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="hPyloriAgStool"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">H.Pylori Ag (Stool)</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="rf"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">RF</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="aso"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">ASO</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="crp"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">CRP</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="hiv"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">HIV</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="fob"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">FOB</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="hcg"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">HCG</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="hepatitisCViralLoad"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Hepatitis C Viral Load</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="hepatitisBViralLoad"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Hepatitis B Viral Load</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Electrolyte Section -->
+      <div class="card mb-3">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              formControlName="isElectrolyteChecked"
+              class="form-check-input"
+            />
+            Electrolyte
+          </label>
+          <div class="form-check mt-2">
+            <input
+              type="checkbox"
+              id="selectAllElectrolyte"
+              class="form-check-input"
+              [checked]="isElectrolyteSelectAllChecked"
+              (change)="toggleElectrolyteSelection($event)"
+            />
+            <label class="form-check-label" for="selectAllElectrolyte">
+              <i class="fas fa-check-double"></i>
+            </label>
+          </div>
+        </div>
+        <div
+          class="card-body"
+          *ngIf="laboratoryForm.get('isElectrolyteChecked')?.value"
+        >
+          <div formGroupName="electrolyte" class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="sodium"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Sodium</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="potassium"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Potassium</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="chloride"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Chloride</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="calcium"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Calcium</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="magnesium"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Magnesium</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="phosphorus"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Phosphorus</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cancer Marker Section -->
+      <div class="card mb-3">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              formControlName="isCancerMarkerChecked"
+              class="form-check-input"
+            />
+            Cancer Marker
+          </label>
+          <div class="form-check mt-2">
+            <input
+              type="checkbox"
+              id="selectAllCancerMarker"
+              class="form-check-input"
+              [checked]="isCancerMarkerSelectAllChecked"
+              (change)="toggleCancerMarkerSelection($event)"
+            />
+            <label class="form-check-label" for="selectAllCancerMarker">
+              <i class="fas fa-check-double"></i>
+            </label>
+          </div>
+        </div>
+        <div
+          class="card-body"
+          *ngIf="laboratoryForm.get('isCancerMarkerChecked')?.value"
+        >
+          <div formGroupName="cancerMarker" class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="cA125"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">CA-125</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="cA199"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">CA-199</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="cA153"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">CA-153</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="cea"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">CEA</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="afp"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">AFP</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cardiac Marker Section -->
+      <div class="card mb-3">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              formControlName="isCardiacMarkerChecked"
+              class="form-check-input"
+            />
+            Cardiac Marker
+          </label>
+          <div class="form-check mt-2">
+            <input
+              type="checkbox"
+              id="selectAllCardiacMarker"
+              class="form-check-input"
+              [checked]="isCardiacMarkerSelectAllChecked"
+              (change)="toggleCardiacMarkerSelection($event)"
+            />
+            <label class="form-check-label" for="selectAllCardiacMarker">
+              <i class="fas fa-check-double"></i>
+            </label>
+          </div>
+        </div>
+        <div
+          class="card-body"
+          *ngIf="laboratoryForm.get('isCardiacMarkerChecked')?.value"
+        >
+          <div formGroupName="cardiacMarker" class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="ckmb"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">CK-MB</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="troponinT"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Troponin T</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="dDimer"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">D-Dimer</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <!-- Coagulation Section -->
+      <div class="card mb-3">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              formControlName="isCoagulationChecked"
+              class="form-check-input"
+            />
+            Coagulation
+          </label>
+          <div class="form-check mt-2">
+            <input
+              type="checkbox"
+              id="selectAllCoagulation"
+              class="form-check-input"
+              [checked]="isCoagulationSelectAllChecked"
+              (change)="toggleCoagulationSelection($event)"
+            />
+            <label class="form-check-label" for="selectAllCoagulation">
+              <i class="fas fa-check-double"></i>
+            </label>
+          </div>
+        </div>
+        <div
+          class="card-body"
+          *ngIf="laboratoryForm.get('isCoagulationChecked')?.value"
+        >
+          <div formGroupName="coagulation" class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="pt"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">PT</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="aptt"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">APTT</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="inr"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">INR</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hormone Section -->
+      <div class="card mb-3">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              formControlName="isHormoneChecked"
+              class="form-check-input"
+            />
+            Hormone
+          </label>
+          <div class="form-check mt-2">
+            <input
+              type="checkbox"
+              id="selectAllHormone"
+              class="form-check-input"
+              [checked]="isHormoneSelectAllChecked"
+              (change)="toggleHormoneSelection($event)"
+            />
+            <label class="form-check-label" for="selectAllHormone">
+              <i class="fas fa-check-double"></i>
+            </label>
+          </div>
+        </div>
+        <div
+          class="card-body"
+          *ngIf="laboratoryForm.get('isHormoneChecked')?.value"
+        >
+          <div formGroupName="hormone" class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="tsh"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">TSH</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="freeT4"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Free T4</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="freeT3"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Free T3</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="totalT4"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Total T4</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="totalT3"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Total T3</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="totalBetaHCGT3"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Beta HCG</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="psa"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">PSA</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="fsh"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">FSH</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="lh"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">LH</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="prolactin"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Prolactin</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other Lab Section -->
+      <div class="card mb-3">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              formControlName="isOtherLabChecked"
+              class="form-check-input"
+            />
+            Other Lab
+          </label>
+          <div class="form-check mt-2">
+            <input
+              type="checkbox"
+              id="selectAllOtherLab"
+              class="form-check-input"
+              [checked]="isOtherLabSelectAllChecked"
+              (change)="toggleOtherLabSelection($event)"
+            />
+            <label class="form-check-label" for="selectAllOtherLab">
+              <i class="fas fa-check-double"></i>
+            </label>
+          </div>
+        </div>
+        <div
+          class="card-body"
+          *ngIf="laboratoryForm.get('isOtherLabChecked')?.value"
+        >
+          <div formGroupName="otherLab" class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="vitB12e"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Vitamin B12e</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  formControlName="vitD"
+                  class="form-check-input"
+                />
+                <label class="form-check-label">Vitamin D</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <select id="hospitalName" formControlName="hospitalName" class="form-select">
+          <option value=""  disabled selected>Referral Hospital:</option>
+          <option *ngFor="let hospital of hospitals" [value]="hospital">
+            {{ hospital }}
+          </option>
+        </select>
+      </div>
+    </div>
+    
+      <!-- Form Submission -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-paper-plane"></i> Send Request
+        </button>
+      </div>
+  </div>
+</form>

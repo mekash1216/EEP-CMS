@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+    <header>
+      <div class="header-content">
+        <div class="header-actions">
+          <input 
+            type="text" 
+            [(ngModel)]="searchTerm" 
+            placeholder="Search..." 
+            (input)="filterRequests()">
+          <button (click)="addNewRequest()" class="btn btn-primary ">
+            <i class="fa fa-plus-circle"></i> Add New Request
+          </button>
+        </div>
+      </div>
+    </header>
+    </div>
+    </div>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Employee ID </th>
+          <th> First Name</th>
+          <th> Last Name</th>
+          <th>Department</th>
+          <th>Request Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of paginatedRequests">
+          <td>{{ request.employeeId }}</td>
+          <td>{{ request.patientFirstName }}</td>
+          <td>{{ request.patientLastName }}</td>
+          <td>{{ request.patientDepartment }}</td>
+          <td>{{ request.requestDate }}</td>
+          <td>
+            <span [ngClass]="{'badge': true, 'bg-success': request.status === 'Accepted', 'bg-danger': request.status === 'Rejected', 'bg-warning': request.status === 'Pending'}">
+              {{ request.status }}
+            </span>
+          </td>
+          <td>
+            <button (click)="edit(request.id)" class="btn btn-info">
+              <i class="fa fa-pencil"></i>
+            </button>
+            <button *ngIf="currentUser && currentUser.roles.includes('reception')" (click)="delete(request.id)" class="btn btn-danger">
+              <i class="fa fa-trash"></i>
+            </button>
+            
+            
+            
+            
+           
+          <button (click)="assignPatient(request.id)" class="btn btn-success">
+           <i class="fa fa-user-plus"></i> 
+          </button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+<!-- Pagination Controls -->
+<div class="pagination-controls">
+    <button (click)="prevPage()" class="btn btn-secondary" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" class="btn btn-secondary" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+  
+  </div>
+  

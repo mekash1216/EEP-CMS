@@ -1,0 +1,170 @@
+<div class="sick-leaves-container container mt-4">
+  <h2 class="text-center mb-4">Sick Leaves</h2>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <!-- Search and Button Row -->
+          <div class="row mb-3">
+            <div class="col-md-6 col-lg-7">
+              <!-- Search Box -->
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control search-input"
+                  [(ngModel)]="searchTerm"
+                  (ngModelChange)="applyFilter()"
+                  placeholder="Search..."
+                />
+                <div class="input-group-append">
+                  <span class="input-group-text"
+                    ><i class="fas fa-search"></i
+                  ></span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-md-6 col-lg-5 d-flex justify-content-end align-items-center"
+            >
+              <!-- Patient List Button -->
+              <button class="btn btn-primary" (click)="viewPatientList()">
+                <i class="fas fa-users"></i>Patient List
+              </button>
+            </div>
+          </div>
+
+          <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Reason</th>
+                <th>Patient</th>
+                <th>Is Expired</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sickLeave of paginatedSickLeaves">
+                <td>{{ sickLeave.startDate | date }}</td>
+                <td>{{ sickLeave.endDate | date }}</td>
+                <td>{{ sickLeave.reason }}</td>
+                <td>
+                  <div class="card">
+                    <div class="card-body p-2">
+                      <strong
+                        >{{ sickLeave.patient.firstName }}
+                        {{ sickLeave.patient.lastName }}</strong
+                      >: <span> {{ sickLeave.patient.cardNo }}</span
+                      ><br />
+                      <span>{{ sickLeave.patient.phoneNumber }}</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span *ngIf="isExpired(sickLeave)" class="text-danger">
+                    <i class="fas fa-times-circle"></i> Yes
+                  </span>
+                  <span *ngIf="!isExpired(sickLeave)" class="text-success">
+                    <i class="fas fa-check-circle"></i> No
+                  </span>
+                </td>
+                <td>
+                  <button class="btn btn-link p-0" (click)="openSickLeaveForm(sickLeave)">
+                    <i class="fas fa-pencil-alt text-warning fa-lg"></i>
+                  </button>
+                    <button class="btn btn-link p-0" (click)="deleteSickLeave(sickLeave.id)">
+                        <i class="fas fa-trash-alt text-danger fa-lg"></i>
+                    </button>
+                
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Pagination Controls -->
+          <nav *ngIf="totalPages > 0">
+            <ul class="pagination justify-content-center">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a
+                  class="page-link"
+                  (click)="previousPage()"
+                  aria-label="Previous"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li
+                class="page-item"
+                [class.active]="currentPage === pageNumber"
+                *ngFor="let pageNumber of pageNumbers"
+              >
+                <a class="page-link" (click)="goToPage(pageNumber)">{{
+                  pageNumber
+                }}</a>
+              </li>
+              <li
+                class="page-item"
+                [class.disabled]="currentPage === totalPages"
+              >
+                <a class="page-link" (click)="nextPage()" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- Modal for Adding Sick Leave -->
+ <div class="modal fade" [ngClass]="{ 'show': isSickLeaveModalOpen }" tabindex="-1" role="dialog" aria-labelledby="sickLeaveModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Sick Leave of {{selectedSickLeave.patient.firstName}} </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeSickLeaveModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="submitEditForm()">
+          <div class="form-group mb-3">
+            <label for="startDate">Start Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="startDate"
+              [(ngModel)]="selectedSickLeave.startDate"
+              name="startDate"
+              required
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="endDate">End Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="endDate"
+              [(ngModel)]="selectedSickLeave.endDate"
+              name="endDate"
+              required
+            />
+          </div>
+          
+          <div class="form-group mb-3">
+            <label for="reason">Reason</label>
+            <textarea  class="form-control" id="reason" 
+            [(ngModel)]="selectedSickLeave.reason" 
+            name="reason"
+             required >
+            </textarea>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">
+            <i class="fas fa-save"></i> Update
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

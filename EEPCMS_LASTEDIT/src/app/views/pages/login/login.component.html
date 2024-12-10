@@ -1,0 +1,75 @@
+<div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-column align-items-center justify-content-center">
+  <c-container breakpoint="md">
+    <c-row class="justify-content-center">
+      <c-col lg="6" xl="4">
+        <c-card-group>
+          <c-card class="p-4">
+            <c-card-body>
+              <div class="text-center mb-4">
+                <img src="assets/images/avatars/8.png" alt="Avatar" style="width: 100px;">
+              </div>
+              <form #form="ngForm" (ngSubmit)="onFormSubmit()">
+                <p class="text-center text-body-secondary">Sign In to your account</p>
+                <c-input-group class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilUser"></svg>
+                  </span>
+                  <input autoComplete="email" cFormControl placeholder="Email" name="email" [(ngModel)]="model.email" required />
+                </c-input-group>
+                <c-input-group class="mb-4">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input autoComplete="current-password" cFormControl placeholder="Password" type="password" name="password" [(ngModel)]="model.password" required />
+                </c-input-group>
+                <c-row class="justify-content-center">
+                  <c-col xs="6">
+                    <button type="submit" cButton class="px-4" color="primary" [disabled]="userService.loading">Login</button>
+                    <div *ngIf="userService.loading" class="spinner-border spinner-border-sm text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </c-col>
+                </c-row>
+                <div class="text-center">
+                  <button cButton class="px-0" color="link">Forgot password?</button>
+                </div>
+              </form>
+            </c-card-body>
+          </c-card>
+        </c-card-group>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>
+
+<!-- Change Password Modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{ show: showChangePasswordModal }" [style.display]="showChangePasswordModal ? 'block' : 'none'">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Change Password</h5>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="changePassword()">
+          <div class="form-group">
+            <label for="oldPassword">Old Password</label>
+            <input type="password" class="form-control" [(ngModel)]="changePasswordDto.oldPassword" name="oldPassword" required readonly />
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" class="form-control" [(ngModel)]="changePasswordDto.newPassword" name="newPassword" required />
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" class="form-control" [(ngModel)]="changePasswordDto.confirmPassword" name="confirmPassword" required />
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">
+            <i class="fas fa-lock" style="margin-right: 0.5em;"></i>
+            Change Password
+          </button>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

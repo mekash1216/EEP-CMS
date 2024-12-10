@@ -1,0 +1,254 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Search Bar with Icon -->
+        <div class="input-group" style="max-width: 250px;">
+          <input type="text" class="form-control form-control-sm" placeholder="Search referrals..." (input)="onSearch($event)" />
+          <span class="input-group-text">
+            <i class="fas fa-search"></i>
+          </span>
+        </div>
+  
+        <!-- Button to View Patient List -->
+        <button class="btn btn-info btn-sm" (click)="navigateToPatientList()">
+          <i class="fas fa-user"></i> Referal
+        </button>
+  
+        <!-- Page Size Selector -->
+        <select class="form-select form-select-sm me-2" style="width: auto;" (change)="onPageSizeChange($event)">
+          <!-- <option *ngFor="let size of pageSizes" [value]="size" [selected]="size === pageSize">
+            {{ size }} per page
+          </option> -->
+        </select>
+      </div>
+    </div>
+  
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Card Number</th>
+            <th>Age</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Weight</th>
+            <th>Pressure</th>
+            <th>Preliminary Tester</th>
+            <th>Assigned Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let examiner of examiners">
+            <td>{{ examiner.patientCardNumber }}</td>
+            <td>{{ examiner.patientAge }}</td>
+            <td>{{ examiner.patientFirstName }}</td>
+            <td>{{ examiner.patientLastName }}</td>
+            <td>{{ examiner.weight }}</td>
+            <td>{{ examiner.pressure }}</td>
+            <td>{{ examiner.doctorName }}</td>
+            <td>{{ examiner.assignedDate }}</td>
+            <td class="d-flex align-items-center">
+              <c-dropdown [popperOptions]="{ placement: 'bottom-start' }">
+                <!-- Just the three dots, no button styling -->
+                <a cDropdownToggle class="text-muted" style="cursor: pointer;">
+                  <i class="fas fa-ellipsis-v"></i> <!-- Three dots vertical icon -->
+                </a>
+                <ul cDropdownMenu class="dropdown-menu">
+                  <!-- Actions -->
+                  <li>
+                    <button class="dropdown-item" (click)="openRegisterPhysicalExamination(examiner)">
+                      <i class="fas fa-stethoscope text-success"></i> Register Patient History
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" (click)="openRegisterPhysicalAssessment(examiner)">
+                      <i class="fas fa-stethoscope text-success"></i> Physical Examination
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" (click)="openLabRequest(examiner)">
+                      <i class="fas fa-flask text-success"></i> Lab Request
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" (click)="openPatientHistoryForm(examiner)">
+                      <i class="fas fa-file-medical text-success"></i>  Previous  History
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" (click)="openReferral(examiner)">
+                      <i class="fas fa-user-plus text-success"></i> Referral
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" (click)="openpreModal(examiner)">
+                      <i class="fas fa-prescription text-success"></i> Prescription
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" (click)="openAppointmentForm(examiner)">
+                      <i class="fas fa-calendar-check text-success"></i> Appointment
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" (click)="openAddSickLeaveForm(examiner)">
+                      <i class="fas fa-calendar-day text-warning"></i> Add Sick Leave
+                    </button>
+                  </li>
+                </ul>
+              </c-dropdown>
+            </td>            
+            
+          </tr>
+        </tbody>
+      </table>
+
+   
+    </div>
+  </div>
+ 
+  <div class="modal" [ngClass]="{ 'show': isAssignModalOpen }">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Prescription Form</h5>
+          <button type="button" class="close" aria-label="Close" (click)="closePrescriptionModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- Modal content here -->
+      
+          <div class="modal-body">
+        <app-prescription [selectedPatient]="selectedAssignment" (oncloseModal)="handleClosePrescriptionModal()"></app-prescription>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Modal for managing appointments -->
+  <div class="modal" [ngClass]="{ 'show': isAppointmentModalOpen }">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Manage Appointment</h5>
+          <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-patientappointment [patient]="selectedAppointment" (onSave)="handleSave($event)"></app-patientappointment>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal for Referral Form -->
+<div class="modal fade" [ngClass]="{ 'show': isReferralModalOpen }" tabindex="-1" role="dialog" aria-labelledby="referralModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Referral for {{ getFormattedPatientName(selectedPatient) }}</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="referralForm" (ngSubmit)="saveReferral()">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="To">To</label>
+                  <input type="text" id="To" class="form-control" formControlName="To">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="From">From</label>
+                  <input type="text" id="From" class="form-control" formControlName="From">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="Clinicalfinding" class="form-label">Clinical Finding</label>
+                  <textarea id="Clinicalfinding" formControlName="Clinicalfinding" class="form-control"></textarea>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="Diagnosis" class="form-label">Diagnosis</label>
+                  <textarea id="Diagnosis" formControlName="Diagnosis" class="form-control"></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="investigationResult" class="form-label">Investigation Result</label>
+                  <textarea id="investigationResult" formControlName="investigationResult" class="form-control"></textarea>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="Rxgiven" class="form-label">RxGiven</label>
+                  <textarea id="Rxgiven" formControlName="Rxgiven" class="form-control"></textarea>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="Reason" class="form-label">Reason For Referral</label>
+                  <textarea id="Reason" formControlName="Reason" class="form-control"></textarea>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="referralDate" class="form-label">Referral Date</label>
+                  <input id="referralDate" formControlName="referralDate" type="datetime-local" class="form-control">
+                  <div class="col-12 mt-3">
+                    <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i>Save Referral</button>
+                  </div>
+                </div>
+              
+              </div>
+            
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal for Registering Physical Examination -->
+<div class="modal" [ngClass]="{ 'show': isRegisterPhysicalExaminationModalOpen }">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Patient History</h5>
+        <button 
+          type="button" 
+          class="close" 
+          aria-label="Close" 
+          (click)="closePhysicalModal()"
+          style="border: none; background: none; padding: 0; margin-left: auto;"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-examination [patientId]="selectedPatientId" (onSave)="handleSavePhysicalExamination($event)"></app-examination>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+ <!-- Modal for Adding Sick Leave -->
+<div class="modal fade" [ngClass]="{ 'show': isSickLeaveModalOpen }" tabindex="-1" role="dialog" aria-labelledby="sickLeaveModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Sick Leave for {{ selectedPatient?.patientFirstName }} {{ selectedPatient?.patientLastName }}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeSickLeaveModal()"></button>
+      </div>
+   <div *ngIf="selectedPatient">
+  <app-sick-leave-form [patientId]="selectedPatient.id" (onSave)="handleSickLeaveSave($event)"></app-sick-leave-form>
+</div>
+    </div>
+  </div>
+</div>
+

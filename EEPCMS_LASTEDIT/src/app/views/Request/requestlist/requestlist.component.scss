@@ -1,0 +1,86 @@
+/* src/app/clinic-requests/requestlist.component.scss */
+.container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header-content h2 {
+    margin: 0;
+  }
+  
+  .header-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-actions input {
+    margin-right: 20px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .header-actions button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #6f7881;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .header-actions button:hover {
+    background-color: #9fa0a1;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background-color: #f8f9fa;
+  }
+  
+  th, td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #8a8e92;
+    color: white;
+  }
+  
+  button {
+    
+    border: none;
+    padding: 5px 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-right: 5px;
+    
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-controls button {
+    margin: 0 10px;
+  }

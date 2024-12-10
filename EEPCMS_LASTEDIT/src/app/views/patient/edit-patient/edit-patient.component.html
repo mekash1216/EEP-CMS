@@ -1,0 +1,36 @@
+<div class="container" >
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input type="text" formControlName="firstName" class="form-control" id="firstName" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input type="text" formControlName="lastName" class="form-control" id="lastName" required>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender:</label>
+          <input type="text" formControlName="gender" class="form-control" id="gender" required>
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number:</label>
+          <input type="text" formControlName="phoneNumber" class="form-control" id="phoneNumber" required>
+        </div>
+        <div class="form-group">
+          <label for="dateOfBirth">Date of Birth:</label>
+          <input type="date" formControlName="dateOfBirth" class="form-control" id="dateOfBirth" required>
+        </div>
+
+        <!-- Add other form fields here for editing other patient details -->
+         <div class="mt-3">
+          <button type="submit" class="btn btn-primary me-3"> <i class="fas fa-pencil-alt"></i> Update</button>
+          <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+         </div>
+
+       
+      </form>
+    </div>
+  </div>
+</div>

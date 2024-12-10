@@ -1,0 +1,88 @@
+// .hidden {
+//   display: none !important;
+// }
+
+/* assign-modal-content.css */
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .modal-header .modal-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .modal-header .close {
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  
+  .modal-header .close span {
+    font-size: 1.5rem;
+    color: #000;
+  }
+  
+  .modal-body {
+    padding-bottom: 20px;
+  }
+  
+  .modal-body form {
+    width: 100%;
+  }
+  
+  .modal-body .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .modal-body .form-group label {
+    font-weight: bold;
+  }
+  
+  .modal-body .form-control {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    margin-top: 10px;
+    text-align: right;
+  }
+  
+  .modal-footer .btn {
+    padding: 8px 16px;
+    margin-right: 10px;
+  }
+  
+  .modal-footer .btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }
+  
+  .modal-footer .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+  }
+  .close{
+  margin-left: 10px;
+  }

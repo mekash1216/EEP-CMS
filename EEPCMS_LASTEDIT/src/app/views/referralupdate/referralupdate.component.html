@@ -1,0 +1,62 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">Edit Referral</h5>
+  <button type="button" class="close" aria-label="Close" (click)="close()" style="border: none; background: none; font-size: 1.5rem; margin-left: auto;">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<!-- Modal Body -->
+<div class="modal-body">
+  <div class="container">
+    <!-- Card for Form -->
+    <div class="card" style="width: 100%;">
+      <div class="card-body">
+        <form [formGroup]="referralForm" (ngSubmit)="saveChanges()">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="To">To</label>
+                <input type="text" id="To" class="form-control" formControlName="to">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="From">From</label>
+                <input type="text" id="From" class="form-control" formControlName="from">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="Clinicalfinding">Clinical Finding</label>
+                <textarea id="Clinicalfinding" formControlName="clinicalfinding" class="form-control"></textarea>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="Diagnosis">Diagnosis</label>
+                <textarea id="Diagnosis" formControlName="diagnosis" class="form-control"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="investigationResult">Investigation Result</label>
+                <textarea id="investigationResult" formControlName="investigationResult" class="form-control"></textarea>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="Rxgiven">Rx Given</label>
+                <textarea id="Rxgiven" formControlName="rxgiven" class="form-control"></textarea>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="reason">Reason For Referral</label>
+                <textarea id="reason" formControlName="reason" class="form-control"></textarea>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="referralDate">Referral Date</label>
+                <input id="referralDate" formControlName="referralDate" type="datetime-local" class="form-control">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">
+              <i class="fas fa-save"></i> Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
