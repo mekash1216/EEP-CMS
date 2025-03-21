@@ -1,13 +1,4 @@
-<div class="modal" [ngClass]="{ 'show': selectedAssignment !== null }">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Assign Examiner</h5>
-        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+         <div class="container">
         <form (ngSubmit)="assignExaminer()" #examinerForm="ngForm">
           <!-- <div class="form-group mb-3">
             <label for="id">ID Number:</label>
@@ -36,6 +27,4 @@
           </div>
         </form>
       </div>
-    </div>
-  </div>
-</div>
+  

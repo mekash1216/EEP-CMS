@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Prescription, PrescriptionItem } from 'src/Models/prescription.model';
-import { AppointmentList, Referral, PhysicalExamination, PatientAppointment, LaboratoryTestResult, SpecialLaboratoryTestResult } from 'src/Models/examiner.model';
-import { environment } from 'src/environment';
+import { Prescription, PrescriptionItem } from '../../Models/prescription.model';
+import { AppointmentList, Referral, PhysicalExamination, PatientAppointment,
+   LaboratoryTestResult, SpecialLaboratoryTestResult } from '../../Models/examiner.model';
+import { environment } from '../../environment';
 
 @Injectable({
   providedIn: 'root'

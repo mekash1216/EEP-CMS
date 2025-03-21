@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Prescription, PrescriptionItem } from 'src/Models/prescription.model';
-import { PrescriptionService } from 'src/app/service/prescription.service';
-import { PrescriptionItemComponent } from 'src/app/views/prescriptionform/prescription-item/prescription-item.component';
+import { Prescription, PrescriptionItem } from '../../../../Models/prescription.model';
+import { PrescriptionService } from '../../../service/prescription.service';
+import { PrescriptionItemComponent } from '../../prescriptionform/prescription-item/prescription-item.component';
 import { RouterModule } from '@angular/router';
-import { Examiner } from 'src/Models/examiner.model';
-import { Stock } from 'src/Models/stock.model';
-import { StockService } from 'src/app/service/stock.service';
+import { Examiner } from '../../../../Models/examiner.model';
+import { Stock } from '../../../../Models/stock.model';
+import { StockService } from '../../../service/stock.service';
 @Component({
   selector: 'app-prescription',
   standalone: true,
@@ -105,7 +105,7 @@ goBack() {
     const prescription: Prescription = this.prescriptionForm.value;
     prescription.prescriptionItems = this.prescriptionItems;
     this.prescriptionService.createPrescription(prescription).subscribe(response => {
-      this.createdPrescriptionId = response.id; // Assuming the response contains the created prescription ID
+      this.createdPrescriptionId = response.id; 
       this.toastr.success('Prescription created successfully', 'Success');
      
     });

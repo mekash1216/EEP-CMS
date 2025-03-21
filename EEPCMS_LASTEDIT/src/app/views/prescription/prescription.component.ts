@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { PrescriptionService } from 'src/app/service/prescription.service';
-import { Prescription, PrescriptionItem } from 'src/Models/prescription.model';
+import { Prescription, PrescriptionItem } from '../../../Models/prescription.model';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { Stock } from 'src/Models/stock.model';
-import { StockPrescriptionService } from 'src/app/service/stock-prescription-service.service'
+import { Stock } from '../../../Models/stock.model';
+import { StockPrescriptionService } from '../../service/stock-prescription-service.service'
 import { Route, Router, Routes } from '@angular/router';
-import { StockService } from 'src/app/service/stock.service';
+import { StockService } from '../../service/stock.service';
 import { NavigationExtras } from '@angular/router';
+import { PrescriptionService } from '../../service/prescription.service';
 @Component({
   selector: 'app-prescription',
   standalone: true,

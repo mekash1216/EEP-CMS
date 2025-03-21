@@ -21,13 +21,16 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<PhysicalExaminationDto>>> GetAll()
+       [HttpGet]
+        public async Task<ActionResult<IEnumerable<PhysicalExaminationviewDto>>> GetAll()
         {
             var physicalExaminations = await _repository.GetAllAsync();
-            var physicalExaminationsDto = _mapper.Map<IEnumerable<PhysicalExaminationDto>>(physicalExaminations);
+
+            var physicalExaminationsDto = _mapper.Map<IEnumerable<PhysicalExaminationviewDto>>(physicalExaminations);
+
             return Ok(physicalExaminationsDto);
         }
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<PhysicalExaminationDto>> GetById(int id)

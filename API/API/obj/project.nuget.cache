@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "38y+iFu6Aww=",
+  "dgSpecHash": "kk2KFPN+KDA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ep710149\\Documents\\Mekash\\API\\API\\API.csproj",
+  "projectFilePath": "D:\\Documents\\NewCMS\\EEP_CMS\\CMS\\API\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ep710149\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ep710149\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

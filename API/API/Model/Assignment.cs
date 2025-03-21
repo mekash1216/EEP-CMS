@@ -7,7 +7,7 @@ namespace API.Model
         public int Id { get; set; }
         public int PatientId { get; set; }
         public DateTime AssignedDate { get; set; }
-        public int PatientAge { get; set; }
+        // public int PatientAge { get; set; }
         public float Weight { get; set; }
         public float SystolicPressure { get; set; }
         public float DiastolicPressure { get; set; }

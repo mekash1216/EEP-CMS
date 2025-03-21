@@ -9,26 +9,31 @@
       <label for="patientId">PID:</label>
       <input type="text" id="patientId" class="form-control" formControlName="patientId" [attr.disabled]="true">
     </div> 
-    <div class="form-group">
-      <label for="weight">Patient Weight:</label>
-      <input type="number" id="weight" class="form-control" formControlName="weight">
+    <div class="row"> 
+    <div class="col-md-6">
+      <div class="form-group w-100">
+        <label for="weight">Patient Weight:</label>
+        <input type="number" id="weight" class="form-control" formControlName="weight">
+      </div>
+      <div class="form-group">
+        <label for="respiratoryRate">respiratoryRate:</label>
+        <input type="number" id="respiratoryRate" class="form-control" formControlName="respiratoryRate">
+      </div>
+      <div class="form-group">
+        <label for="systolicPressure">SystolicPressure:</label>
+        <input type="number" id="systolicPressure" class="form-control" formControlName="systolicPressure">
+      </div>
+      <div class="form-group">
+        <label for="diastolicPressure">DiastolicPressure:</label>
+        <input type="number" id="diastolicPressure" class="form-control" formControlName="diastolicPressure">
+      </div>
+   
     </div>
-    <div class="form-group">
-      <label for="respiratoryRate">respiratoryRate:</label>
-      <input type="number" id="respiratoryRate" class="form-control" formControlName="respiratoryRate">
-    </div>
-    <div class="form-group">
-      <label for="systolicPressure">SystolicPressure:</label>
-      <input type="number" id="systolicPressure" class="form-control" formControlName="systolicPressure">
-    </div>
-    <div class="form-group">
-      <label for="diastolicPressure">DiastolicPressure:</label>
-      <input type="number" id="diastolicPressure" class="form-control" formControlName="diastolicPressure">
-    </div>
-    <div class="form-group">
-      <label for="pulseRate">PulseRate:</label>
-      <input type="number" id="pulseRate" class="form-control" formControlName="pulseRate">
-    </div>
+ <div class="col-md-6">
+  <div class="form-group">
+    <label for="pulseRate">PulseRate:</label>
+    <input type="number" id="pulseRate" class="form-control" formControlName="pulseRate">
+  </div>
     <div class="form-group">
       <label for="spO2">SpO2:</label>
       <input type="number" id="spO2" class="form-control" formControlName="spO2">
@@ -46,6 +51,10 @@
         <option value="chronic-ncd">Chronic/NCD</option>
       </select>
     </div>
+    </div>
+    </div>
+ 
+
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary me-2" (click)="onCancel()">Close</button>
       <button type="submit" class="btn btn-primary"> <i class="fas fa-pencil-alt"></i>Update</button>

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/service/user.service';
-import { PhysicalAssessment } from 'src/Models/examiner.model';
+import { UserService } from '../../../service/user.service';
+import { PhysicalAssessment } from '../../../../Models/examiner.model';
 import { CommonModule } from '@angular/common';
-import { User, User2 } from 'src/Models/user.model';
+import { User, User2 } from '../../../../Models/user.model';
 
 @Component({
   selector: 'app-assessment',

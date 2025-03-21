@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Doctor, SecondDoctor } from 'src/Models/doctor.model';
-import { Examinerpage } from 'src/Models/examiner.model';
+import { Doctor, SecondDoctor } from '../../../../Models/doctor.model';
+import { Examinerpage } from '../../../../Models/examiner.model';
 import { CommonModule } from '@angular/common';
-import { ExaminerService } from 'src/app/service/examiner.service';
+import { ExaminerService } from '../../../service/examiner.service';
 import { FormsModule } from '@angular/forms';
-import { Assign } from 'src/Models/assign.model';
-import { DoctorService } from 'src/app/service/doctor.service';
-import { User2 } from 'src/Models/user.model';
+import { Assign } from '../../../../Models/assign.model';
+import { DoctorService } from '../../../service/doctor.service';
+import { User2 } from '../../../../Models/user.model';
 
 @Component({
   selector: 'app-assignexaminer',

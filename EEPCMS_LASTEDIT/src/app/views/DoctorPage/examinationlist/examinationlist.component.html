@@ -4,7 +4,7 @@
   <div *ngIf="!loading" class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
           <div>
-              <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." class="form-control" style="width: auto; display: inline-block; margin-right: 10px;">
+              <input type="text" [(ngModel)]="searchTerm" placeholder="Search using ID..." class="form-control" style="width: auto; display: inline-block; margin-right: 10px;">
           </div>
           <div>
               <label for="itemsPerPage">Items per page:</label>
@@ -16,6 +16,7 @@
       <table class="table table-striped mt-2">
           <thead>
               <tr>
+                <th> Patient CardNo</th>
                   <th>General Appearance</th>
                   <th>Vital Signs</th>
                   <th>Head and Neck</th>
@@ -28,13 +29,14 @@
           </thead>
           <tbody>
               <tr *ngFor="let examination of paginatedExaminations()">
-                  <td>{{ examination.generalAppearance }}</td>
-                  <td>{{ examination.vitalSigns }}</td>
-                  <td>{{ examination.headAndNeck }}</td>
-                  <td>{{ examination.cardiovascular }}</td>
-                  <td>{{ examination.respiratory }}</td>
-                  <td>{{ examination.abdomen }}</td>
-                  <td>{{ examination.examinationDate | date:'short' }}</td>
+                <td> {{ examination.patientcardNo}}</td>
+                  <td style="max-width: 150px;">{{ examination.generalAppearance }}</td>
+                  <td style="max-width: 150px;">{{ examination.vitalSigns }}</td>
+                  <td style="max-width: 150px;">{{ examination.headAndNeck }}</td>
+                  <td style="max-width: 150px;">{{ examination.cardiovascular }}</td>
+                  <td style="max-width: 150px;">{{ examination.respiratory }}</td>
+                  <td style="max-width: 150px;">{{ examination.abdomen }}</td>
+                  <td style="max-width: 150px;">{{ examination.examinationDate | date:'short' }}</td>
                   <td>
                       <button class="btn btn-link p-0" (click)="openModal(examination)">
                           <i class="fas fa-pencil-alt text-warning fa-lg"></i>

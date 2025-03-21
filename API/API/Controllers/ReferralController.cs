@@ -50,7 +50,7 @@ namespace API.Controllers
                     {
                         Id = r.Examiner.Id,
                         PatientName = $"{r.Examiner.Patient.firstName} {r.Examiner.Patient.lastName}",
-                        RegExaminerName = $"{r.Examiner.ExaminerName}"
+                        // RegExaminerName = $"{r.Examiner.ExaminerName}"
                     }
                 }).Distinct(); // Ensure uniqueness
 
@@ -196,7 +196,7 @@ namespace API.Controllers
                     {
                         Id = r.Examiner.Id,
                         PatientName = $"{r.Examiner.Patient.firstName} {r.Examiner.Patient.lastName}",
-                        RegExaminerName = $"{r.Examiner.ExaminerName}"
+                        // RegExaminerName = $"{r.Examiner.ExaminerName}"
                     }
                 }).Distinct(); // Ensure uniqueness
 

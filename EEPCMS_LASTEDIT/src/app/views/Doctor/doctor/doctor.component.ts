@@ -3,19 +3,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Assign } from 'src/Models/assign.model'; 
-import { AssignmentService } from 'src/app/service/assignment.service';
+import { Assign } from '../../../../Models/assign.model'; 
+import { AssignmentService } from '../../../service/assignment.service';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Patient } from 'src/Models/patient.model';
-import { EditdoctorComponent } from 'src/app/views/Doctor/editdoctor/editdoctor.component';
-import { UserService } from 'src/app/service/user.service';
-import { Doctor, SecondDoctor } from 'src/Models/doctor.model';
-import { Examinerpage } from 'src/Models/examiner.model';
-import { AssignexaminerComponent } from 'src/app/views/Doctor/assignexaminer/assignexaminer.component';
-import { Assignment } from 'src/Models/assignment.model';
-import { DoctorService } from 'src/app/service/doctor.service';
-import { User2 } from 'src/Models/user.model';
+import { Patient } from '../../../../Models/patient.model';
+import { EditdoctorComponent } from '../../Doctor/editdoctor/editdoctor.component';
+import { UserService } from '../../../service/user.service';
+import { Doctor, SecondDoctor } from '../../../../Models/doctor.model';
+import { Examinerpage } from '../../../../Models/examiner.model';
+import { AssignexaminerComponent } from '../../Doctor/assignexaminer/assignexaminer.component';
+import { Assignment } from '../../../../Models/assignment.model';
+import { DoctorService } from '../../../service/doctor.service';
+import { User2 } from '../../../../Models/user.model';
 @Component({
   selector: 'app-doctor',
   standalone: true,
@@ -53,8 +53,7 @@ export class DoctorComponent implements OnInit {
   
   ) { }
   closeModal() {
-    this.isAssignModalOpen = false; // Close modal
-    // Optionally reset selectedAssignment or perform other actions
+    this.isAssignModalOpen = false; 
   }
   fetchAssignments(): void {
     this.assignmentService.getAssignments().subscribe(

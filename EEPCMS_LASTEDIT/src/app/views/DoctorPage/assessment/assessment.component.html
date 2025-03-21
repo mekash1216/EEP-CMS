@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container mt-4 w-100">
 
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
@@ -40,17 +40,17 @@
             </thead>
             <tbody>
               <tr *ngFor="let assessment of paginatedAssessments">
-                <td>{{ patientNames[assessment.patientId] || 'Unknown' }}</td>
-                <td>{{ assessment.heent }}</td>
-                <td>{{ assessment.glands }}</td>
-                <td>{{ assessment.chest }}</td>
-                <td>{{ assessment.cvs }}</td>
-                <td>{{ assessment.abdomen }}</td>
-                <td>{{ assessment.genitoUninary }}</td>
-                <td>{{ assessment.musculoSkeleton }}</td>
-                <td>{{ assessment.skin }}</td>
-                <td>{{ assessment.cns }}</td>
-                <td>{{ assessment.date | date }}</td>
+                <td style="max-width: 150px;">{{ patientNames[assessment.patientId] || 'Unknown' }}</td>
+                <td style="max-width: 150px;">{{ assessment.heent }}</td>
+                <td style="max-width: 150px;">{{ assessment.glands }}</td>
+                <td style="max-width: 150px;">{{ assessment.chest }}</td>
+                <td style="max-width: 150px;">{{ assessment.cvs }}</td>
+                <td style="max-width: 150px;">{{ assessment.abdomen }}</td>
+                <td style="max-width: 150px;">{{ assessment.genitoUninary }}</td>
+                <td style="max-width: 150px;">{{ assessment.musculoSkeleton }}</td>
+                <td style="max-width: 150px;">{{ assessment.skin }}</td>
+                <td style="max-width: 150px;">{{ assessment.cns }}</td>
+                <td style="max-width: 150px;">{{ assessment.date | date }}</td>
                 <td>
                       <button class="btn btn-link p-0" (click)="edit(assessment.id)">
                         <i class="fas fa-pencil-alt text-warning fa-lg"></i>

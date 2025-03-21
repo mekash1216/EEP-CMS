@@ -43,7 +43,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/patient/patientlist/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['reception'] 
+          expectedRoles: ['reception','Admin'] 
         }
       },
       {
@@ -51,7 +51,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/Doctor/doctor/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['preliminary']
+          expectedRoles: ['preliminary','Admin']
         }
       },
       {
@@ -59,7 +59,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/DoctorPage/listofpatient/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['doctor'] 
+          expectedRoles: ['doctor','Admin'] 
         }
       },
 
@@ -68,7 +68,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/DoctorPage/examinationlist/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['doctor']
+          expectedRoles: ['doctor','Admin']
         }
       },
       {
@@ -76,7 +76,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/Appointment/appointmentlist/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['doctor'] 
+          expectedRoles: ['doctor','Admin'] 
         }
       },
       {
@@ -84,7 +84,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/prescription/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['doctor','StockMan'] 
+          expectedRoles: ['doctor','StockMan','Admin'] 
         }
       },
       {
@@ -92,7 +92,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/labrequest/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['doctor','lab'] 
+          expectedRoles: ['doctor','lab','Admin'] 
         }
       },
       {
@@ -100,7 +100,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/labdetails/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['lab','doctor'] 
+          expectedRoles: ['lab','doctor','Admin'] 
         }
       },
       {
@@ -108,7 +108,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/lablist/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['lab','doctor'] 
+          expectedRoles: ['lab','doctor','Admin'] 
         }
       },
       {
@@ -116,7 +116,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/labtestresult/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles:  ['lab','doctor'] 
+          expectedRoles:  ['lab','doctor','Admin'] 
         }
       },
       {
@@ -124,7 +124,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/labtestresultdetail/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles:  ['lab','doctor'] 
+          expectedRoles:  ['lab','doctor','Admin'] 
         }
       },
       {
@@ -132,7 +132,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/labresultform/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['lab','doctor'] 
+          expectedRoles: ['lab','doctor','Admin'] 
         }
       },
       {
@@ -140,7 +140,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/labedit/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles:  ['doctor'] 
+          expectedRoles:  ['doctor','Admin'] 
         }
       },
       {
@@ -148,7 +148,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/stock/stocklist/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['StockMan'] 
+          expectedRoles: ['StockMan','Admin'] 
         }
       },
       {
@@ -156,7 +156,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/referral/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['doctor','reception'] 
+          expectedRoles: ['doctor','reception','Admin'] 
         }
       },
 
@@ -165,7 +165,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/prescriptionprint/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['StockMan'] 
+          expectedRoles: ['StockMan','Admin'] 
         }
       },
       {
@@ -173,7 +173,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/print-referral/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['reception','doctor'] 
+          expectedRoles: ['reception','doctor','Admin'] 
         }
       },
       {
@@ -181,7 +181,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/DoctorPage/patienthistory/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['doctor'] 
+          expectedRoles: ['doctor','Admin'] 
         }
       },
       {
@@ -189,7 +189,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/Request/requestlist/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['manager'] 
+          expectedRoles: ['manager','Admin'] 
         }
       },
       {
@@ -197,7 +197,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/Request/requestform/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['manager'] 
+          expectedRoles: ['manager','Admin'] 
         }
       },
       {
@@ -205,7 +205,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/DoctorPage/assessment/routes').then((m) => m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['doctor'] 
+          expectedRoles: ['doctor','Admin'] 
         }
       },
       {
@@ -213,7 +213,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/DoctorPage/assessmentform/routes').then((m)=>m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['doctor'] 
+          expectedRoles: ['doctor','Admin'] 
         }
       },
       {
@@ -221,7 +221,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/DoctorPage/assessmentedit/routes').then((m)=>m.routes),
         canActivate: [RoleGuard],
         data: {
-          expectedRoles: ['doctor'] 
+          expectedRoles: ['doctor','Admin'] 
         }
       },
 

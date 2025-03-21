@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { LabtestresultdetailComponent } from '../labtestresultdetail/labtestresultdetail.component';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination'; // Import ngx-pagination module
-import { UserService } from 'src/app/service/user.service';
+import { UserService } from '../../../app/service/user.service';
 
 @Component({
   selector: 'app-labtestresult',
@@ -36,14 +36,14 @@ export class LabtestresultComponent implements OnInit {
   }
 
   loadSpecialTests(): void {
-    this.http.get<any[]>('https://localhost:7292/api/LabBloodFilmTest').subscribe(data => {
+    this.http.get<any[]>('http://localhost:5153/api/LabBloodFilmTest').subscribe(data => {
       this.specialTestData = data;
       this.combineData();
     });
   }
 
   loadNonSpecialTests(): void {
-    this.http.get<any[]>('https://localhost:7292/api/LaboratoryTestResult').subscribe(data => {
+    this.http.get<any[]>('http://localhost:5153/api/LaboratoryTestResult').subscribe(data => {
         this.nonSpecialTestData = data;
         this.combineData();
   
@@ -126,8 +126,8 @@ applyFilters(): void {
   onDeleteTest(): void {
     if (this.selectedTest) {
       const apiUrl = this.selectedTest.isSpecial
-        ? `https://localhost:7292/api/LabBloodFilmTest/${this.selectedTest.id}`
-        : `https://localhost:7292/api/LaboratoryTestResult/${this.selectedTest.id}`;
+        ? `http://localhost:5153/api/LabBloodFilmTest/${this.selectedTest.id}`
+        : `http://localhost:5153/api/LaboratoryTestResult/${this.selectedTest.id}`;
 
       this.http.delete(apiUrl).subscribe({
         next: () => {

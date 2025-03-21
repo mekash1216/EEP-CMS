@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LaboratoryRequest } from 'src/Models/labrequest.model';
-import { DoctorService } from 'src/app/service/doctor.service';
+import { LaboratoryRequest } from '../../../Models/labrequest.model';
+import { DoctorService } from '../../../app/service/doctor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -188,8 +188,8 @@ colorOptions: { [test: string]: string[] } = {
   
   };
 
-  private apiUrlBloodFilm = 'https://localhost:7292/api/LabBloodFilmTest';
-  private apiUrlOtherTests = 'https://localhost:7292/api/LaboratoryTestResult';
+  private apiUrlBloodFilm = 'http://localhost:5153/api/LabBloodFilmTest';
+  private apiUrlOtherTests = 'http://localhost:5153/api/LaboratoryTestResult';
 
   constructor(private labRequestService: DoctorService, private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
 
@@ -210,7 +210,7 @@ colorOptions: { [test: string]: string[] } = {
       data => {
         this.request = data;
         this.initializeCategories();
-        this.patientId = this.request.patientId; 
+        this.patientId = this.request!.patientId; 
         this.newTestResult.PatientId = this.patientId;
       },
       error => {
@@ -293,7 +293,7 @@ colorOptions: { [test: string]: string[] } = {
   
     if (this.newTestResult.Test === 'urinalysis') {
       // For Urine Dipstick Test
-      apiUrl = 'https://localhost:7292/api/UrineDipsticksTest';
+      apiUrl = 'http://localhost:5153/api/UrineDipsticksTest';
       dataToSend = {
         category: this.newTestResult.Category,
         test: this.newTestResult.Test,

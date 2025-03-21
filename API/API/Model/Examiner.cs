@@ -6,7 +6,7 @@ namespace API.Model
     {
         public int Id { get; set; }
         public DateTime AssignedDate { get; set; }
-        public string ExaminerName { get; set; }
+        // public string ExaminerName { get; set; }
         [ForeignKey(nameof(Patient))]
         public int? PatientId { get; set; }
         public virtual Patient? Patient { get; set; }

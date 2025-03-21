@@ -1,15 +1,15 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { StockService } from 'src/app/service/stock.service';
-import { Stock } from 'src/Models/stock.model';
+import { StockService } from '../../../service/stock.service';
+import { Stock } from '../../../../Models/stock.model';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { AddstockComponent } from 'src/app/views/stock/addstock/addstock.component';
+import { AddstockComponent } from '../../stock/addstock/addstock.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CardModule } from '@coreui/angular';
-import { Prescription, PrescriptionItem } from 'src/Models/prescription.model';
-import { StockPrescriptionService } from 'src/app/service/stock-prescription-service.service';
+import { Prescription, PrescriptionItem } from '../../../../Models/prescription.model';
+import { StockPrescriptionService } from '../../../service/stock-prescription-service.service';
 
 @Component({
   selector: 'app-stocklist',
@@ -31,7 +31,7 @@ export class StockListComponent implements OnInit {
   prescriptions: Prescription[] = [];
   pagedStocks: Stock[] = [];
   currentPage: number = 1;
-  itemsPerPage: number = 1;
+  itemsPerPage: number = 5;
   totalPages: number = 0;
   pages: number[] = [];
   selectedStock: Stock = {

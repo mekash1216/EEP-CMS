@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ep710149\\Documents\\Mekash\\API\\API\\API.csproj": {}
+    "D:\\Documents\\NewCMS\\EEP_CMS\\CMS\\API\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ep710149\\Documents\\Mekash\\API\\API\\API.csproj": {
+    "D:\\Documents\\NewCMS\\EEP_CMS\\CMS\\API\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ep710149\\Documents\\Mekash\\API\\API\\API.csproj",
+        "projectUniqueName": "D:\\Documents\\NewCMS\\EEP_CMS\\CMS\\API\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\ep710149\\Documents\\Mekash\\API\\API\\API.csproj",
+        "projectPath": "D:\\Documents\\NewCMS\\EEP_CMS\\CMS\\API\\API\\API.csproj",
         "packagesPath": "C:\\Users\\ep710149\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ep710149\\Documents\\Mekash\\API\\API\\obj\\",
+        "outputPath": "D:\\Documents\\NewCMS\\EEP_CMS\\CMS\\API\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

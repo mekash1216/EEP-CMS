@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Assign } from 'src/Models/assign.model';
-import { AssignmentService } from 'src/app/service/assignment.service';
+import { Assign } from '../../../../Models/assign.model';
+import { AssignmentService } from '../../../service/assignment.service';
 import { Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';

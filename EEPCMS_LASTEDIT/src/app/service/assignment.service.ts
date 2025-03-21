@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Assignment } from 'src/Models/assignment.model'; 
-import { Assign } from 'src/Models/assign.model'; 
-import { environment } from 'src/environment';
+import { Assignment } from '../../Models/assignment.model'; 
+import { Assign } from '../../Models/assign.model'; 
+import { environment } from '../../environment';
 
 @Injectable({
   providedIn: 'root'

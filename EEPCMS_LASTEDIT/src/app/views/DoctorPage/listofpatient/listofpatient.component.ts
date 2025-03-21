@@ -1,8 +1,8 @@
 import { Component, Input,NgModule  } from '@angular/core';
-import { Examiner, PatientAppointment, PhysicalExamination, Referral } from 'src/Models/examiner.model';
+import { Examiner, PatientAppointment, PhysicalExamination, Referral } from '../../../../Models/examiner.model';
 import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ExaminerService } from 'src/app/service/examiner.service'
+import { ExaminerService } from '../../../service/examiner.service'
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
@@ -15,14 +15,14 @@ import { CardBodyComponent, CardComponent, DropdownComponent,
   DropdownToggleDirective, } from '@coreui/angular';
 import { PrescriptionComponent } from "../../prescriptionform/prescription/prescription.component";
 import { PatientappointmentComponent } from '../../appointment/patientappointment/patientappointment.component';
-import { PrescriptionService } from 'src/app/service/prescription.service';
-import { Patient } from 'src/Models/patient.model';
-import { UserService } from 'src/app/service/user.service';
+import { PrescriptionService } from '../../../service/prescription.service';
+import { Patient } from '../../../../Models/patient.model';
+import { UserService } from '../../../../app/service/user.service';
 import { ReferralComponent } from "../../referral/referral.component";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PatienthistoryComponent } from 'src/app/views/DoctorPage/patienthistory/patienthistory.component';
-import { ExaminationComponent } from 'src/app/views/DoctorPage/examination/examination.component';
-import{ SickLeaveFormComponent } from 'src/app/views/patient/sick-leave-form/sick-leave-form.component'
+import { PatienthistoryComponent } from '../../../views/DoctorPage/patienthistory/patienthistory.component';
+import { ExaminationComponent } from '../../../views/DoctorPage/examination/examination.component';
+import{ SickLeaveFormComponent } from '../../../views/patient/sick-leave-form/sick-leave-form.component'
 @Component({
     selector: 'app-listofpatient',
     standalone: true,

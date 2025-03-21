@@ -31,7 +31,7 @@
               <td>{{ appointment.patientCardNumber }}</td>
               <td>{{ appointment.patientFirstName }}</td>
               <td>{{ appointment.patientLastName }}</td>
-              <td>{{ appointment.reason }}</td>
+              <td style="max-width: 150px;">{{ appointment.reason }}</td>
               <td>
                 <button class="btn btn-link p-0"  (click)="openEditModal(appointment)">
                   <i class="fas fa-pencil-alt text-warning fa-lg"></i>

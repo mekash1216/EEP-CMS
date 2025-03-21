@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { LaboratoryRequest } from 'src/Models/labrequest.model';
+import { LaboratoryRequest } from '../../../Models/labrequest.model';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from 'src/Models/user.model';
-import { UserService } from 'src/app/service/user.service';
+import { User } from '../../../Models/user.model';
+import { UserService } from '../../../app/service/user.service';
 
 @Component({
   selector: 'app-labdetails',
@@ -29,7 +29,7 @@ export class LabdetailsComponent implements OnInit{
   }
   
   fetchRequest(id: number): void {
-    this.http.get<LaboratoryRequest>(`https://localhost:7292/api/LaboratoryRequests/${id}`)
+    this.http.get<LaboratoryRequest>(`http://localhost:5153/api/LaboratoryRequests/${id}`)
       .subscribe(data => {
         this.request = data;
       });
@@ -37,7 +37,7 @@ export class LabdetailsComponent implements OnInit{
 
   saveChanges(): void {
     if (this.request) {
-      this.http.put(`https://localhost:7292/api/LaboratoryRequests/${this.request.id}`, this.request)
+      this.http.put(`http://localhost:5153/api/LaboratoryRequests/${this.request.id}`, this.request)
         .subscribe(() => {
           this.editMode = false;
           alert('Changes saved successfully');

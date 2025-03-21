@@ -124,9 +124,6 @@ namespace API.Migrations
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PatientAge")
-                        .HasColumnType("int");
-
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
@@ -508,10 +505,6 @@ namespace API.Migrations
 
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ExaminerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PatientId")
                         .HasColumnType("int");
@@ -1071,6 +1064,8 @@ namespace API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
 
                     b.ToTable("PhysicalExaminations");
                 });
@@ -1697,6 +1692,17 @@ namespace API.Migrations
                     b.HasOne("API.Model.Doctor", null)
                         .WithMany("Patients")
                         .HasForeignKey("DoctorId");
+                });
+
+            modelBuilder.Entity("API.Model.PhysicalExamination", b =>
+                {
+                    b.HasOne("API.Model.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("API.Model.Referral", b =>

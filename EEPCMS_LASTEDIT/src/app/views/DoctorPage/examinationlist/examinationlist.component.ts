@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PrescriptionService } from 'src/app/service/prescription.service';
-import { PhysicalExamination } from 'src/Models/examiner.model';
+import { PrescriptionService } from '../../../service/prescription.service';
+import { PhysicalExamination } from '../../../../Models/examiner.model';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
@@ -60,7 +60,7 @@ export class ExaminationlistComponent implements OnInit {
   openModal(examination: any): void {
     this.editingExamination = true;
     this.currentExaminationId = examination.id;
-    this.selectedPatientId = examination.patientId; // Set the patient ID here
+    this.selectedPatientId = examination.patientId; 
     this.physicalExaminationForm.patchValue({
       generalAppearance: examination.generalAppearance,
       vitalSigns: examination.vitalSigns,

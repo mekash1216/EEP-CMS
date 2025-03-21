@@ -70,6 +70,8 @@ namespace API.Mapping
                
                 .ReverseMap();
             CreateMap<PhysicalExamination, PhysicalExaminationDto>().ReverseMap();
+             CreateMap<PhysicalExamination, PhysicalExaminationviewDto>()
+            .ForMember(dest => dest.PatientcardNo, opt => opt.MapFrom(src => src.Patient.cardNo));
             CreateMap<PhysicalAssessment, PhysicalAssessmentDTO>().ReverseMap();
             CreateMap<Parasitology, ParasitologyDto>().ReverseMap();
             CreateMap<Urinalysis, UrinalysisDto>().ReverseMap();

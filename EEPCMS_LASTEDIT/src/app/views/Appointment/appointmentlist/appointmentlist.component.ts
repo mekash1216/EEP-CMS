@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PrescriptionService } from 'src/app/service/prescription.service';
-import { AppointmentList, PatientAppointment } from 'src/Models/examiner.model';
+import { PrescriptionService } from '../../../service/prescription.service';
+import { AppointmentList, PatientAppointment } from '../../../../Models/examiner.model';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
@@ -42,7 +42,7 @@ export class AppointmentlistComponent implements OnInit {
   }
 
   loadAppointments(): void {
-    this.http.get<any[]>('https://localhost:7292/api/Appointment')
+    this.http.get<any[]>('http://localhost:5153/api/Appointment')
       .subscribe(data => {
         console.log('Appointments loaded:', data); 
         this.appointments = data;
@@ -78,7 +78,7 @@ export class AppointmentlistComponent implements OnInit {
   saveAppointment(): void {
     if (this.editForm.valid) {
       const updatedAppointment = { ...this.selectedAppointment, ...this.editForm.value };
-      this.http.put(`https://localhost:7292/api/Appointment/${updatedAppointment.id}`, updatedAppointment)
+      this.http.put(`http://localhost:5153/api/Appointment/${updatedAppointment.id}`, updatedAppointment)
         .subscribe(() => {
           this.loadAppointments();
           this.closeModal();
@@ -87,7 +87,7 @@ export class AppointmentlistComponent implements OnInit {
   }
 
   deleteAppointment(id: number): void {
-    this.http.delete(`https://localhost:7292/api/Appointment/${id}`)
+    this.http.delete(`http://localhost:5153/api/Appointment/${id}`)
       .subscribe(() => {
         this.loadAppointments();
       });

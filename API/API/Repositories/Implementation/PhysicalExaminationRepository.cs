@@ -17,7 +17,11 @@ namespace API.Repositories.Implementation
 
     public async Task<IEnumerable<PhysicalExamination>> GetAllAsync()
     {
-        return await _context.PhysicalExaminations.ToListAsync();
+        return await _context.PhysicalExaminations
+           .Include(a => a.Patient)
+        .ToListAsync();
+
+       
     }
 
     public async Task<PhysicalExamination> GetByIdAsync(int id)

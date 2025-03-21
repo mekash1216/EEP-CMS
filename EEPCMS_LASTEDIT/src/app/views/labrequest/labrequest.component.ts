@@ -4,9 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from 'src/app/service/user.service';
-import { LaboratoryRequest } from 'src/Models/labrequest.model';
-import { Patient } from 'src/Models/patient.model';
+import { UserService } from '../../../app/service/user.service';
+import { LaboratoryRequest } from '../../../Models/labrequest.model';
+import { Patient } from '../../../Models/patient.model';
 
 @Component({
   selector: 'app-labrequest',
@@ -184,7 +184,7 @@ export class LabrequestComponent implements OnInit {
     if (this.laboratoryForm.valid) {
       const formData: LaboratoryRequest = this.laboratoryForm.value;
       console.log('Form Data:', formData);
-      this.http.post('https://localhost:7292/api/LaboratoryRequests', formData).subscribe({
+      this.http.post('http://localhost:5153/api/LaboratoryRequests', formData).subscribe({
         next: (response) => {
           this.toastr.success('Form submitted successfully!', 'Success');
         },

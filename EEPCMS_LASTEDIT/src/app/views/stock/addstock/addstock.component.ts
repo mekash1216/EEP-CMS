@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Stock } from 'src/Models/stock.model';
-import { StockService } from 'src/app/service/stock.service';
+import { Stock } from '../../../../Models/stock.model';
+import { StockService } from '../../../service/stock.service';
 import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-addstock',
@@ -29,20 +29,20 @@ export class AddstockComponent {
   }; 
 
   constructor(
-    private stockService: StockService, // Inject your service
+    private stockService: StockService, 
     private router: Router,
-    private toastr: ToastrService // Inject ToastrService for notifications
+    private toastr: ToastrService 
   ) {}
 
   onSubmit(): void {
     this.stockService.createStock(this.newStock).subscribe(
       () => {
-        // this.toastr.success('Stock added successfully.', 'Success'); // Show success toast
-        // this.router.navigate(['/stocks']); // Navigate to stock list after adding
+        this.toastr.success('Stock added successfully.', 'Success'); 
+        // this.router.navigate(['/stocks']); 
       },
       error => {
         console.error('Error adding stock:', error);
-        this.toastr.error('Failed to add stock.', 'Error'); // Show error toast
+        this.toastr.error('Failed to add stock.', 'Error'); 
       }
     );
   }

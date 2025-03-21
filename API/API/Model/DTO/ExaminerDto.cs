@@ -6,7 +6,7 @@ namespace API.Model.DTO
         public int Id { get; set; }
         public int PatientId { get; set; }
         public int AssignmentId { get; set; }
-        public string ExaminerName { get; set; }
+        // public string ExaminerName { get; set; }
         public DateTime AssignedDate { get; set; }
     }
     public class ExaminerDetailDto
@@ -19,7 +19,7 @@ namespace API.Model.DTO
         public string? PatientLastName { get; set; }
         public float Weight { get; set; }
         public float Pressure { get; set; }
-        public string ExaminerName { get; set; }
+        // public string ExaminerName { get; set; }
         public DateTime AssignedDate { get; set; }
     }
 
@@ -28,7 +28,7 @@ namespace API.Model.DTO
         public int Id { get; set; }
         public int PatientId { get; set; }
         public int AssignmentId { get; set; }
-        public string ExaminerName { get; set; }
+        // public string ExaminerName { get; set; }
         public DateTime AssignedDate { get; set; }
     }
 

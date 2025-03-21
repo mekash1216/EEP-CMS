@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Import FormsModule here
 import { Router } from '@angular/router';
-import { LaboratoryRequest } from 'src/Models/labrequest.model';
-import { UserService } from 'src/app/service/user.service';
-import { Patient } from 'src/Models/patient.model';
+import { LaboratoryRequest } from '../../../Models/labrequest.model';
+import { UserService } from '../../../app/service/user.service';
+import { Patient } from '../../../Models/patient.model';
 @Component({
   selector: 'app-lablist',
   standalone: true,
@@ -38,7 +38,7 @@ export class LablistComponent implements OnInit {
     });
   }
   fetchLaboratoryRequests(): void {
-    this.http.get<LaboratoryRequest[]>('https://localhost:7292/api/LaboratoryRequests')
+    this.http.get<LaboratoryRequest[]>('http://localhost:5153/api/LaboratoryRequests')
       .subscribe(data => {
         this.laboratoryRequests = data;
         this.filteredRequests = data;
@@ -76,7 +76,7 @@ export class LablistComponent implements OnInit {
 
   deleteRequest(id: number): void {
     if (confirm('Are you sure you want to delete this request?')) {
-      this.http.delete(`https://localhost:7292/api/LaboratoryRequests/${id}`)
+      this.http.delete(`http://localhost:5153/api/LaboratoryRequests/${id}`)
         .subscribe(() => {
           this.laboratoryRequests = this.laboratoryRequests.filter(request => request.id !== id);
           this.filteredRequests = this.filteredRequests.filter(request => request.id !== id);
